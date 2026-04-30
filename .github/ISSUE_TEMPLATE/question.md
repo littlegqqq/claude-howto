@@ -1,40 +1,40 @@
 ---
 name: Question
-about: Ask a question about Claude Code or this guide
+about: 询问关于 Claude Code 或本指南的问题
 title: "[QUESTION] "
 labels: question
 assignees: ''
 
 ---
 
-## Question
-What would you like to know?
+## 问题
+您想了解什么？
 
-## Context
-Provide some background or context for your question:
-- What are you trying to do?
-- What have you already tried?
-- What examples or guides have you looked at?
+## 背景
+请提供一些背景信息或上下文：
+- 您想做什么？
+- 您已经尝试过什么？
+- 您参考过哪些示例或指南？
 
-## Relevant Topic
-Which topic is this related to?
-- [ ] Slash Commands
-- [ ] Memory
-- [ ] Skills
-- [ ] Subagents
-- [ ] MCP Protocol
-- [ ] Hooks
-- [ ] Plugins
-- [ ] Checkpoints
-- [ ] Advanced Features
-- [ ] CLI Reference
-- [ ] Other
+## 相关主题
+此问题与哪个主题相关？
+- [ ] Slash Commands（斜杠命令）
+- [ ] Memory（记忆）
+- [ ] Skills（技能）
+- [ ] Subagents（子代理）
+- [ ] MCP Protocol（MCP 协议）
+- [ ] Hooks（钩子）
+- [ ] Plugins（插件）
+- [ ] Checkpoints（检查点）
+- [ ] Advanced Features（高级功能）
+- [ ] CLI Reference（CLI 参考）
+- [ ] Other（其他）
 
-## What You've Tried
-Have you already tried anything? What was the result?
+## 已尝试的方法
+您已经尝试过什么？结果如何？
 
-## Expected Outcome
-What would help you solve this?
+## 期望的结果
+什么能帮助您解决这个问题？
 
-## Additional Resources
-Any links or resources that might be relevant?
+## 附加资源
+任何可能相关的链接或资源？

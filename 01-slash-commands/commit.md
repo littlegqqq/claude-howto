@@ -4,26 +4,26 @@ argument-hint: [message]
 description: Create a git commit with context
 ---
 
-## Context
+## 上下文
 
-- Current git status: !`git status`
-- Current git diff: !`git diff HEAD`
-- Current branch: !`git branch --show-current`
-- Recent commits: !`git log --oneline -10`
+- 当前 git 状态：!`git status`
+- 当前 git 差异：!`git diff HEAD`
+- 当前分支：!`git branch --show-current`
+- 最近的提交记录：!`git log --oneline -10`
 
-## Your task
+## 你的任务
 
-Based on the above changes, create a single git commit.
+根据以上变更，创建一个 git 提交（commit）。
 
-If a message was provided via arguments, use it: $ARGUMENTS
+如果通过参数提供了提交信息，请使用该信息：$ARGUMENTS
 
-Otherwise, analyze the changes and create an appropriate commit message following conventional commits format:
-- `feat:` for new features
-- `fix:` for bug fixes
-- `docs:` for documentation changes
-- `refactor:` for code refactoring
-- `test:` for adding tests
-- `chore:` for maintenance tasks
+否则，请分析变更内容并按照约定式提交（Conventional Commits）格式创建适当的提交信息：
+- `feat:` 用于新功能
+- `fix:` 用于缺陷修复
+- `docs:` 用于文档变更
+- `refactor:` 用于代码重构
+- `test:` 用于添加测试
+- `chore:` 用于维护任务
 
 ---
-**Last Updated**: April 9, 2026
+**最后更新**：2026 年 4 月 9 日

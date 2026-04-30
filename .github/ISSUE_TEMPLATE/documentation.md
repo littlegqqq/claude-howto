@@ -1,44 +1,44 @@
 ---
 name: Documentation Issue
-about: Report unclear documentation, typos, or missing information
+about: 报告文档不清晰、拼写错误或信息缺失
 title: "[DOCS] "
 labels: documentation
 assignees: ''
 
 ---
 
-## Type of Issue
-- [ ] Typo or grammar error
-- [ ] Unclear explanation
-- [ ] Missing information
-- [ ] Broken link or reference
-- [ ] Outdated content
-- [ ] Better example needed
+## 问题类型
+- [ ] 拼写或语法错误
+- [ ] 解释不清晰
+- [ ] 信息缺失
+- [ ] 链接或引用失效
+- [ ] 内容过时
+- [ ] 需要更好的示例
 
-## Location
-Which section has the issue?
-- **File**: (e.g., README.md, 03-skills/README.md)
-- **Section**: (e.g., "Installation Quick Reference")
-- **Line/Area**: (if specific)
+## 位置
+哪个部分存在问题？
+- **文件**：（如 README.md、03-skills/README.md）
+- **章节**：（如"安装快速参考"）
+- **行/区域**：（如果能具体指出）
 
-## Current Content
-What does it currently say?
+## 当前内容
+目前的内容是什么？
 ```
-[Paste the current text here]
-```
-
-## Issue Description
-What's wrong with it?
-
-## Suggested Improvement
-How could this be improved or clarified?
-```
-[Provide improved text or suggestion here]
+[在此粘贴当前文本]
 ```
 
-## Why This Matters
-How does this issue impact users?
+## 问题描述
+哪里有问题？
 
-## Related Documentation
-Links to related sections:
-- Related Guide: <!-- Add link here -->
+## 改进建议
+如何改进或使其更清晰？
+```
+[在此提供改进后的文本或建议]
+```
+
+## 影响说明
+此问题如何影响用户？
+
+## 相关文档
+相关章节的链接：
+- 相关指南：<!-- 在此添加链接 -->

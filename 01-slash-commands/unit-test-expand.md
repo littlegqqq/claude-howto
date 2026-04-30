@@ -4,25 +4,25 @@ description: Increase test coverage by targeting untested branches and edge case
 tags: testing, coverage, unit-tests
 ---
 
-# Expand Unit Tests
+# 扩展单元测试
 
-Expand existing unit tests adapted to project's testing framework:
+扩展现有的单元测试，以适配项目的测试框架：
 
-1. **Analyze coverage**: Run coverage report to identify untested branches, edge cases, and low-coverage areas
-2. **Identify gaps**: Review code for logical branches, error paths, boundary conditions, null/empty inputs
-3. **Write tests** using project's framework:
-   - Jest/Vitest/Mocha (JavaScript/TypeScript)
-   - pytest/unittest (Python)
-   - Go testing/testify (Go)
-   - Rust test framework (Rust)
-4. **Target specific scenarios**:
-   - Error handling and exceptions
-   - Boundary values (min/max, empty, null)
-   - Edge cases and corner cases
-   - State transitions and side effects
-5. **Verify improvement**: Run coverage again, confirm measurable increase
+1. **分析覆盖率**：运行覆盖率报告，识别未测试的分支、边界情况和低覆盖率区域
+2. **识别差距**：审查代码中的逻辑分支、错误路径、边界条件、空值/空输入
+3. **编写测试**，使用项目的测试框架：
+   - Jest/Vitest/Mocha（JavaScript/TypeScript）
+   - pytest/unittest（Python）
+   - Go testing/testify（Go）
+   - Rust test framework（Rust）
+4. **针对特定场景**：
+   - 错误处理和异常
+   - 边界值（最小值/最大值、空值、null）
+   - 边界情况和极端情况
+   - 状态转换和副作用
+5. **验证改进**：再次运行覆盖率报告，确认覆盖率有可衡量的提升
 
-Present new test code blocks only. Follow existing test patterns and naming conventions.
+仅展示新的测试代码块。遵循现有的测试模式和命名规范。
 
 ---
-**Last Updated**: April 9, 2026
+**最后更新**：2026 年 4 月 9 日

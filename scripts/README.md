@@ -3,33 +3,33 @@
   <img alt="Claude How To" src="../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# EPUB Builder Script
+# EPUB 构建脚本
 
-Build an EPUB ebook from the Claude How-To markdown files.
+从 Claude How-To markdown 文件构建 EPUB 电子书。
 
-## Features
+## 功能特性
 
-- Organizes chapters by folder structure (01-slash-commands, 02-memory, etc.)
-- Renders Mermaid diagrams as PNG images via Kroki.io API
-- Async concurrent fetching - renders all diagrams in parallel
-- Generates a cover image from the project logo
-- Converts internal markdown links to EPUB chapter references
-- Strict error mode - fails if any diagram cannot be rendered
+- 按文件夹结构组织章节（01-slash-commands、02-memory 等）
+- 通过 Kroki.io API 将 Mermaid 图表渲染为 PNG 图片
+- 异步并发获取 - 并行渲染所有图表
+- 从项目 logo 生成封面图片
+- 将内部 markdown 链接转换为 EPUB 章节引用
+- 严格错误模式 - 任何图表无法渲染时构建失败
 
-## Requirements
+## 环境要求
 
 - Python 3.10+
 - [uv](https://github.com/astral-sh/uv)
-- Internet connection for Mermaid diagram rendering
+- 用于 Mermaid 图表渲染的网络连接
 
-## Quick Start
+## 快速开始
 
 ```bash
 # Simplest way - uv handles everything
 uv run scripts/build_epub.py
 ```
 
-## Development Setup
+## 开发环境设置
 
 ```bash
 # Create virtual environment
@@ -46,7 +46,7 @@ pytest scripts/tests/ -v
 python scripts/build_epub.py
 ```
 
-## Command-Line Options
+## 命令行选项
 
 ```
 usage: build_epub.py [-h] [--root ROOT] [--output OUTPUT] [--verbose]
@@ -61,7 +61,7 @@ options:
   --max-concurrent N    Max concurrent requests (default: 10)
 ```
 
-## Examples
+## 示例
 
 ```bash
 # Build with verbose output
@@ -74,17 +74,17 @@ uv run scripts/build_epub.py --output ~/Desktop/claude-guide.epub
 uv run scripts/build_epub.py --max-concurrent 5
 ```
 
-## Output
+## 输出
 
-Creates `claude-howto-guide.epub` in the repository root directory.
+在仓库根目录创建 `claude-howto-guide.epub`。
 
-The EPUB includes:
-- Cover image with project logo
-- Table of contents with nested sections
-- All markdown content converted to EPUB-compatible HTML
-- Mermaid diagrams rendered as PNG images
+EPUB 包含：
+- 带项目 logo 的封面图片
+- 带嵌套章节的目录
+- 所有 markdown 内容转换为 EPUB 兼容的 HTML
+- Mermaid 图表渲染为 PNG 图片
 
-## Running Tests
+## 运行测试
 
 ```bash
 # With virtual environment
@@ -98,23 +98,23 @@ uv run --with pytest --with pytest-asyncio \
     pytest scripts/tests/ -v
 ```
 
-## Dependencies
+## 依赖
 
-Managed via PEP 723 inline script metadata:
+通过 PEP 723 内联脚本元数据管理：
 
-| Package | Purpose |
-|---------|---------|
-| `ebooklib` | EPUB generation |
-| `markdown` | Markdown to HTML conversion |
-| `beautifulsoup4` | HTML parsing |
-| `httpx` | Async HTTP client |
-| `pillow` | Cover image generation |
-| `tenacity` | Retry logic |
+| 包 | 用途 |
+|---|------|
+| `ebooklib` | EPUB 生成 |
+| `markdown` | Markdown 到 HTML 转换 |
+| `beautifulsoup4` | HTML 解析 |
+| `httpx` | 异步 HTTP 客户端 |
+| `pillow` | 封面图片生成 |
+| `tenacity` | 重试逻辑 |
 
-## Troubleshooting
+## 故障排除
 
-**Build fails with network error**: Check internet connectivity and Kroki.io status. Try `--timeout 60`.
+**构建因网络错误失败**：检查网络连接和 Kroki.io 状态。尝试 `--timeout 60`。
 
-**Rate limiting**: Reduce concurrent requests with `--max-concurrent 3`.
+**速率限制**：使用 `--max-concurrent 3` 减少并发请求数。
 
-**Missing logo**: The script generates a text-only cover if `claude-howto-logo.png` is not found.
+**缺少 logo**：如果找不到 `claude-howto-logo.png`，脚本会生成纯文本封面。

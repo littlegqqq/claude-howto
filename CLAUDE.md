@@ -1,157 +1,157 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+本文件为 Claude Code (claude.ai/code) 在本仓库中工作时提供指导。
 
-## Project Overview
+## 项目概述
 
-Claude How To is a tutorial repository for Claude Code features. This is **documentation-as-code** — the primary output is markdown files organized into numbered learning modules, not an executable application.
+Claude How To 是一个 Claude Code 功能的教程仓库。这是**文档即代码**——主要产出是按编号学习模块组织的 markdown 文件，而非可执行应用程序。
 
-**Architecture**: Each module (01-10) covers a specific Claude Code feature with copy-paste templates, Mermaid diagrams, and examples. The build system validates documentation quality and generates an EPUB ebook.
+**架构**：每个模块（01-10）覆盖一个特定的 Claude Code 功能，包含可复制粘贴的模板、Mermaid 图表和示例。构建系统验证文档质量并生成 EPUB 电子书。
 
-## Common Commands
+## 常用命令
 
-### Pre-commit Quality Checks
+### 提交前质量检查
 
-All documentation must pass four quality checks before commits (these run automatically via pre-commit hooks):
+所有文档在提交前必须通过四项质量检查（这些通过 pre-commit 钩子自动运行）：
 
 ```bash
-# Install pre-commit hooks (runs on every commit)
+# 安装 pre-commit 钩子（每次提交时运行）
 pre-commit install
 
-# Run all checks manually
+# 手动运行所有检查
 pre-commit run --all-files
 ```
 
-The four checks are:
-1. **markdown-lint** — Markdown structure and formatting via `markdownlint`
-2. **cross-references** — Internal links, anchors, code fence syntax (Python script)
-3. **mermaid-syntax** — Validates all Mermaid diagrams parse correctly (Python script)
-4. **link-check** — External URLs are reachable (Python script)
-5. **build-epub** — EPUB generates without errors (on `.md` changes)
+四项检查分别是：
+1. **markdown-lint** — 通过 `markdownlint` 检查 Markdown 结构和格式
+2. **cross-references** — 内部链接、锚点、代码围栏语法（Python 脚本）
+3. **mermaid-syntax** — 验证所有 Mermaid 图表能正确解析（Python 脚本）
+4. **link-check** — 外部 URL 可达（Python 脚本）
+5. **build-epub** — EPUB 生成无错误（针对 `.md` 变更）
 
-### Development Environment Setup
+### 开发环境设置
 
 ```bash
-# Install uv (Python package manager)
+# 安装 uv（Python 包管理器）
 pip install uv
 
-# Create virtual environment and install Python dependencies
+# 创建虚拟环境并安装 Python 依赖
 uv venv
 source .venv/bin/activate
 uv pip install -r scripts/requirements-dev.txt
 
-# Install Node.js tools (markdown linter and Mermaid validator)
+# 安装 Node.js 工具（markdown 检查器和 Mermaid 验证器）
 npm install -g markdownlint-cli
 npm install -g @mermaid-js/mermaid-cli
 
-# Install pre-commit hooks
+# 安装 pre-commit 钩子
 uv pip install pre-commit
 pre-commit install
 ```
 
-### Testing
+### 测试
 
-Python scripts in `scripts/` have unit tests:
+`scripts/` 中的 Python 脚本有单元测试：
 
 ```bash
-# Run all tests
+# 运行所有测试
 pytest scripts/tests/ -v
 
-# Run with coverage
+# 运行并生成覆盖率
 pytest scripts/tests/ -v --cov=scripts --cov-report=html
 
-# Run specific test
+# 运行特定测试
 pytest scripts/tests/test_build_epub.py -v
 ```
 
-### Code Quality
+### 代码质量
 
 ```bash
-# Lint and format Python code
+# 检查和格式化 Python 代码
 ruff check scripts/
 ruff format scripts/
 
-# Security scan
+# 安全扫描
 bandit -c scripts/pyproject.toml -r scripts/ --exclude scripts/tests/
 
-# Type checking
+# 类型检查
 mypy scripts/ --ignore-missing-imports
 ```
 
-### EPUB Build
+### EPUB 构建
 
 ```bash
-# Generate ebook (renders Mermaid diagrams via Kroki.io API)
+# 生成电子书（通过 Kroki.io API 渲染 Mermaid 图表）
 uv run scripts/build_epub.py
 
-# With options
+# 带选项
 uv run scripts/build_epub.py --verbose --output custom-name.epub --max-concurrent 5
 ```
 
-## Directory Structure
+## 目录结构
 
 ```
-├── 01-slash-commands/      # User-invoked shortcuts
-├── 02-memory/              # Persistent context examples
-├── 03-skills/              # Reusable capabilities
-├── 04-subagents/           # Specialized AI assistants
-├── 05-mcp/                 # Model Context Protocol examples
-├── 06-hooks/               # Event-driven automation
-├── 07-plugins/             # Bundled features
-├── 08-checkpoints/         # Session snapshots
-├── 09-advanced-features/   # Planning, thinking, backgrounds
-├── 10-cli/                 # CLI reference
+├── 01-slash-commands/      # 用户调用的快捷命令
+├── 02-memory/              # 持久化上下文示例
+├── 03-skills/              # 可复用能力
+├── 04-subagents/           # 专业 AI 助手
+├── 05-mcp/                 # 模型上下文协议示例
+├── 06-hooks/               # 事件驱动自动化
+├── 07-plugins/             # 捆绑功能
+├── 08-checkpoints/         # 会话快照
+├── 09-advanced-features/   # 规划、思考、后台运行
+├── 10-cli/                 # CLI 参考
 ├── scripts/
-│   ├── build_epub.py           # EPUB generator (renders Mermaid via Kroki API)
-│   ├── check_cross_references.py   # Validates internal links
-│   ├── check_links.py          # Checks external URLs
-│   ├── check_mermaid.py        # Validates Mermaid syntax
-│   └── tests/                  # Unit tests for scripts
-├── .pre-commit-config.yaml    # Quality check definitions
-└── README.md               # Main guide (also module index)
+│   ├── build_epub.py           # EPUB 生成器（通过 Kroki API 渲染 Mermaid）
+│   ├── check_cross_references.py   # 验证内部链接
+│   ├── check_links.py          # 检查外部 URL
+│   ├── check_mermaid.py        # 验证 Mermaid 语法
+│   └── tests/                  # 脚本的单元测试
+├── .pre-commit-config.yaml    # 质量检查定义
+└── README.md               # 主指南（也是模块索引）
 ```
 
-## Content Guidelines
+## 内容指南
 
-### Module Structure
-Each numbered folder follows the pattern:
-- **README.md** — Overview of the feature with examples
-- **Example files** — Copy-paste templates (`.md` for commands, `.json` for configs, `.sh` for hooks)
-- Files are organized by feature complexity and dependencies
+### 模块结构
+每个编号文件夹遵循以下模式：
+- **README.md** — 功能概述及示例
+- **示例文件** — 可复制粘贴的模板（命令用 `.md`，配置用 `.json`，钩子用 `.sh`）
+- 文件按功能复杂度和依赖关系组织
 
-### Mermaid Diagrams
-- All diagrams must parse successfully (checked by pre-commit hook)
-- EPUB build renders diagrams via Kroki.io API (requires internet)
-- Use Mermaid for flowcharts, sequence diagrams, and architecture visuals
+### Mermaid 图表
+- 所有图表必须能成功解析（由 pre-commit 钩子检查）
+- EPUB 构建通过 Kroki.io API 渲染图表（需要网络）
+- 使用 Mermaid 绘制流程图、序列图和架构图
 
-### Cross-References
-- Use relative paths for internal links (e.g., `(01-slash-commands/README.md)`)
-- Code fences must specify language (e.g., ` ```bash `, ` ```python `)
-- Anchor links use `#heading-name` format
+### 交叉引用
+- 内部链接使用相对路径（如 `(01-slash-commands/README.md)`）
+- 代码围栏必须指定语言（如 ` ```bash `、` ```python `）
+- 锚点链接使用 `#heading-name` 格式
 
-### Link Validation
-- External URLs must be reachable (checked by pre-commit hook)
-- Avoid linking to ephemeral content
-- Use permalinks where possible
+### 链接验证
+- 外部 URL 必须可达（由 pre-commit 钩子检查）
+- 避免链接到短暂内容
+- 尽可能使用永久链接
 
-## Key Architecture Points
+## 关键架构要点
 
-1. **Numbered folders indicate learning order** — The 01-10 prefix represents the recommended sequence for learning Claude Code features. This numbering is intentional; do not reorganize alphabetically.
+1. **编号文件夹表示学习顺序** — 01-10 的前缀代表学习 Claude Code 功能的推荐顺序。这个编号是有意为之的；不要按字母顺序重新组织。
 
-2. **Scripts are utilities, not the product** — The Python scripts in `scripts/` support documentation quality and EPUB generation. The actual content is in the numbered module folders.
+2. **脚本是工具，不是产品** — `scripts/` 中的 Python 脚本支持文档质量和 EPUB 生成。实际内容在编号模块文件夹中。
 
-3. **Pre-commit is the gatekeeper** — All four quality checks must pass before a PR is accepted. The CI pipeline runs these same checks as a second pass.
+3. **Pre-commit 是守门人** — 所有四项质量检查必须在 PR 被接受前通过。CI 管道运行相同的检查作为第二道关。
 
-4. **Mermaid rendering requires network** — The EPUB build calls Kroki.io API to render diagrams. Build failures here are typically network issues or invalid Mermaid syntax.
+4. **Mermaid 渲染需要网络** — EPUB 构建调用 Kroki.io API 来渲染图表。此处的构建失败通常是网络问题或无效的 Mermaid 语法。
 
-5. **This is a tutorial, not a library** — When adding content, focus on clear explanations, copy-paste examples, and visual diagrams. The value is in teaching concepts, not providing reusable code.
+5. **这是教程，不是库** — 添加内容时，专注于清晰的解释、可复制粘贴的示例和可视化图表。价值在于教授概念，而非提供可复用代码。
 
-## Commit Conventions
+## 提交约定
 
-Follow conventional commit format:
+遵循约定式提交格式：
 - `feat(slash-commands): Add API documentation generator`
 - `docs(memory): Improve personal preferences example`
 - `fix(README): Correct table of contents link`
 - `refactor(hooks): Simplify hook configuration examples`
 
-Scope should match the folder name when applicable.
+范围应尽可能匹配文件夹名称。

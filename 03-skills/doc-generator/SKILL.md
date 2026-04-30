@@ -1,38 +1,38 @@
 ---
 name: api-documentation-generator
-description: Generate comprehensive, accurate API documentation from source code. Use when creating or updating API documentation, generating OpenAPI specs, or when users mention API docs, endpoints, or documentation.
+description: 从源代码生成全面、准确的 API 文档。创建或更新 API 文档、生成 OpenAPI 规范时使用，或当用户提到 API 文档、端点或文档时使用。
 ---
 
-# API Documentation Generator Skill
+# API 文档生成器技能
 
-## Generates
+## 生成内容
 
-- OpenAPI/Swagger specifications
-- API endpoint documentation
-- SDK usage examples
-- Integration guides
-- Error code references
-- Authentication guides
+- OpenAPI/Swagger 规范
+- API 端点文档
+- SDK 使用示例
+- 集成指南
+- 错误代码参考
+- 认证指南
 
-## Documentation Structure
+## 文档结构
 
-### For Each Endpoint
+### 每个端点
 
 ```markdown
 ## GET /api/v1/users/:id
 
-### Description
-Brief explanation of what this endpoint does
+### 描述
+此端点功能的简要说明
 
-### Parameters
+### 参数
 
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| id | string | Yes | User ID |
+| 名称 | 类型 | 必填 | 描述 |
+|------|------|------|------|
+| id | string | 是 | 用户 ID |
 
-### Response
+### 响应
 
-**200 Success**
+**200 成功**
 ```json
 {
   "id": "usr_123",
@@ -42,7 +42,7 @@ Brief explanation of what this endpoint does
 }
 ```
 
-**404 Not Found**
+**404 未找到**
 ```json
 {
   "error": "USER_NOT_FOUND",
@@ -50,7 +50,7 @@ Brief explanation of what this endpoint does
 }
 ```
 
-### Examples
+### 示例
 
 **cURL**
 ```bash

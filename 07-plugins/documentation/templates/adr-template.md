@@ -1,39 +1,39 @@
-# ADR [Number]: [Title]
+# ADR [编号]: [标题]
 
-## Status
-[Proposed | Accepted | Deprecated | Superseded]
+## 状态
+[提议中 | 已接受 | 已弃用 | 已取代]
 
-## Context
-What is the issue that we're seeing that is motivating this decision or change?
+## 背景
+是什么问题促使我们做出这个决策或变更？
 
-## Decision
-What is the change that we're proposing and/or doing?
+## 决策
+我们提议和/或正在进行什么变更？
 
-## Consequences
-What becomes easier or more difficult to do because of this change?
+## 后果
+这个变更会使什么变得更容易或更困难？
 
-### Positive
-- Benefit 1
-- Benefit 2
+### 正面影响
+- 优势 1
+- 优势 2
 
-### Negative
-- Drawback 1
-- Drawback 2
+### 负面影响
+- 劣势 1
+- 劣势 2
 
-### Neutral
-- Consideration 1
-- Consideration 2
+### 中性影响
+- 考量 1
+- 考量 2
 
-## Alternatives Considered
-What other options were considered and why were they not chosen?
+## 考虑过的替代方案
+还考虑了哪些其他选项，为什么没有选择它们？
 
-### Alternative 1
-Description and reason for not choosing.
+### 替代方案 1
+描述及未选择的原因。
 
-### Alternative 2
-Description and reason for not choosing.
+### 替代方案 2
+描述及未选择的原因。
 
-## References
-- Related ADRs
-- External documentation
-- Discussion links
+## 参考资料
+- 相关的 ADR
+- 外部文档
+- 讨论链接

@@ -3,65 +3,65 @@
   <img alt="Claude How To" src="../resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Memory Guide
+# 记忆指南
 
-Memory enables Claude to retain context across sessions and conversations. It exists in two forms: automatic synthesis in claude.ai, and filesystem-based CLAUDE.md in Claude Code.
+记忆使 Claude 能够在不同会话和对话之间保留上下文。它有两种形式：claude.ai 中的自动综合，以及 Claude Code 中基于文件系统的 CLAUDE.md。
 
-## Overview
+## 概述
 
-Memory in Claude Code provides persistent context that carries across multiple sessions and conversations. Unlike temporary context windows, memory files allow you to:
+Claude Code 中的记忆提供跨多个会话和对话的持久上下文。与临时上下文窗口不同，记忆文件允许你：
 
-- Share project standards across your team
-- Store personal development preferences
-- Maintain directory-specific rules and configurations
-- Import external documentation
-- Version control memory as part of your project
+- 在团队间共享项目标准
+- 存储个人开发偏好
+- 维护特定目录的规则和配置
+- 导入外部文档
+- 将记忆作为项目的一部分进行版本控制
 
-The memory system operates at multiple levels, from global personal preferences down to specific subdirectories, allowing for fine-grained control over what Claude remembers and how it applies that knowledge.
+记忆系统在多个层级运作，从全局个人偏好到特定子目录，允许对 Claude 记住什么以及如何应用这些知识进行精细控制。
 
-## Memory Commands Quick Reference
+## 记忆命令快速参考
 
-| Command | Purpose | Usage | When to Use |
+| 命令 | 用途 | 用法 | 使用时机 |
 |---------|---------|-------|-------------|
-| `/init` | Initialize project memory | `/init` | Starting new project, first-time CLAUDE.md setup |
-| `/memory` | Edit memory files in editor | `/memory` | Extensive updates, reorganization, reviewing content |
-| `#` prefix | ~~Quick single-line memory add~~ **Discontinued** | — | Use `/memory` or ask conversationally instead |
-| `@path/to/file` | Import external content | `@README.md` or `@docs/api.md` | Referencing existing documentation in CLAUDE.md |
+| `/init` | 初始化项目记忆 | `/init` | 启动新项目，首次设置 CLAUDE.md |
+| `/memory` | 在编辑器中编辑记忆文件 | `/memory` | 大量更新、重组、审查内容 |
+| `#` 前缀 | ~~快速单行添加记忆~~ **已停用** | — | 改用 `/memory` 或以对话方式请求 |
+| `@path/to/file` | 导入外部内容 | `@README.md` 或 `@docs/api.md` | 在 CLAUDE.md 中引用现有文档 |
 
-## Quick Start: Initializing Memory
+## 快速入门：初始化记忆
 
-### The `/init` Command
+### `/init` 命令
 
-The `/init` command is the fastest way to set up project memory in Claude Code. It initializes a CLAUDE.md file with foundational project documentation.
+`/init` 命令是在 Claude Code 中设置项目记忆的最快方式。它会初始化一个包含基础项目文档的 CLAUDE.md 文件。
 
-**Usage:**
+**用法：**
 
 ```bash
 /init
 ```
 
-**What it does:**
+**功能说明：**
 
-- Creates a new CLAUDE.md file in your project (typically at `./CLAUDE.md` or `./.claude/CLAUDE.md`)
-- Establishes project conventions and guidelines
-- Sets up the foundation for context persistence across sessions
-- Provides a template structure for documenting your project standards
+- 在项目中创建新的 CLAUDE.md 文件（通常位于 `./CLAUDE.md` 或 `./.claude/CLAUDE.md`）
+- 建立项目约定和指南
+- 为跨会话的上下文持久化奠定基础
+- 提供用于记录项目标准的模板结构
 
-**Enhanced interactive mode:** Set `CLAUDE_CODE_NEW_INIT=1` to enable a multi-phase interactive flow that walks you through project setup step by step:
+**增强交互模式：** 设置 `CLAUDE_CODE_NEW_INIT=1` 以启用多阶段交互流程，逐步引导你完成项目设置：
 
 ```bash
 CLAUDE_CODE_NEW_INIT=1 claude
 /init
 ```
 
-**When to use `/init`:**
+**何时使用 `/init`：**
 
-- Starting a new project with Claude Code
-- Establishing team coding standards and conventions
-- Creating documentation about your codebase structure
-- Setting up memory hierarchy for collaborative development
+- 使用 Claude Code 开始新项目时
+- 建立团队编码标准和约定时
+- 创建关于代码库结构的文档时
+- 为协作开发设置记忆层级时
 
-**Example workflow:**
+**示例工作流程：**
 
 ```markdown
 # In your project directory
@@ -80,74 +80,74 @@ CLAUDE_CODE_NEW_INIT=1 claude
 - Git workflow conventions
 ```
 
-### Quick Memory Updates
+### 快速记忆更新
 
-> **Note**: The `#` shortcut for inline memory was discontinued. Use `/memory` to edit memory files directly, or ask Claude conversationally to remember something (e.g., "remember that we always use TypeScript strict mode").
+> **注意**：内联记忆的 `#` 快捷方式已停用。请使用 `/memory` 直接编辑记忆文件，或以对话方式要求 Claude 记住某些内容（例如，"记住我们在这个项目中始终使用 TypeScript 严格模式"）。
 
-The recommended ways to add information to memory are:
+推荐的向记忆中添加信息的方式有：
 
-**Option 1: Use `/memory` command**
+**方式 1：使用 `/memory` 命令**
 
 ```bash
 /memory
 ```
 
-Opens your memory files in your system editor for direct editing.
+在系统编辑器中打开记忆文件进行直接编辑。
 
-**Option 2: Ask conversationally**
+**方式 2：以对话方式请求**
 
 ```
 Remember that we always use TypeScript strict mode in this project.
 Please add to memory: prefer async/await over promise chains.
 ```
 
-Claude will update the appropriate CLAUDE.md file based on your request.
+Claude 会根据你的请求更新相应的 CLAUDE.md 文件。
 
-**Historical reference** (no longer functional):
+**历史参考**（已不再有效）：
 
-The `#` prefix shortcut previously allowed adding rules inline:
+`#` 前缀快捷方式此前允许内联添加规则：
 
 ```markdown
 # Always use TypeScript strict mode in this project  ← no longer works
 ```
 
-If you relied on this pattern, switch to the `/memory` command or conversational requests.
+如果你之前依赖此模式，请改用 `/memory` 命令或对话方式请求。
 
-### The `/memory` Command
+### `/memory` 命令
 
-The `/memory` command provides direct access to edit your CLAUDE.md memory files within Claude Code sessions. It opens your memory files in your system editor for comprehensive editing.
+`/memory` 命令提供在 Claude Code 会话中直接编辑 CLAUDE.md 记忆文件的功能。它会在系统编辑器中打开记忆文件，便于全面编辑。
 
-**Usage:**
+**用法：**
 
 ```bash
 /memory
 ```
 
-**What it does:**
+**功能说明：**
 
-- Opens your memory files in your system's default editor
-- Allows you to make extensive additions, modifications, and reorganizations
-- Provides direct access to all memory files in the hierarchy
-- Enables you to manage persistent context across sessions
+- 在系统默认编辑器中打开记忆文件
+- 允许进行大量添加、修改和重组
+- 提供对层级中所有记忆文件的直接访问
+- 支持跨会话管理持久上下文
 
-**When to use `/memory`:**
+**何时使用 `/memory`：**
 
-- Reviewing existing memory content
-- Making extensive updates to project standards
-- Reorganizing memory structure
-- Adding detailed documentation or guidelines
-- Maintaining and updating memory as your project evolves
+- 审查现有记忆内容
+- 对项目标准进行大量更新
+- 重组记忆结构
+- 添加详细的文档或指南
+- 随着项目发展维护和更新记忆
 
-**Comparison: `/memory` vs `/init`**
+**`/memory` 与 `/init` 的对比**
 
-| Aspect | `/memory` | `/init` |
+| 方面 | `/memory` | `/init` |
 |--------|-----------|---------|
-| **Purpose** | Edit existing memory files | Initialize new CLAUDE.md |
-| **When to use** | Update/modify project context | Begin new projects |
-| **Action** | Opens editor for changes | Generates starter template |
-| **Workflow** | Ongoing maintenance | One-time setup |
+| **用途** | 编辑现有记忆文件 | 初始化新的 CLAUDE.md |
+| **使用时机** | 更新/修改项目上下文 | 开始新项目 |
+| **操作** | 打开编辑器进行修改 | 生成入门模板 |
+| **工作流** | 持续维护 | 一次性设置 |
 
-**Example workflow:**
+**示例工作流程：**
 
 ```markdown
 # Open memory for editing
@@ -166,9 +166,9 @@ The `/memory` command provides direct access to edit your CLAUDE.md memory files
 # Claude automatically reloads the updated memory
 ```
 
-**Using Memory Imports:**
+**使用记忆导入：**
 
-CLAUDE.md files support the `@path/to/file` syntax to include external content:
+CLAUDE.md 文件支持 `@path/to/file` 语法以包含外部内容：
 
 ```markdown
 # Project Documentation
@@ -180,18 +180,18 @@ See @docs/architecture.md for system design
 @~/.claude/my-project-instructions.md
 ```
 
-**Import features:**
+**导入功能特性：**
 
-- Both relative and absolute paths are supported (e.g., `@docs/api.md` or `@~/.claude/my-project-instructions.md`)
-- Recursive imports are supported with a maximum depth of 5
-- First-time imports from external locations trigger an approval dialog for security
-- Import directives are not evaluated inside markdown code spans or code blocks (so documenting them in examples is safe)
-- Helps avoid duplication by referencing existing documentation
-- Automatically includes referenced content in Claude's context
+- 支持相对路径和绝对路径（例如 `@docs/api.md` 或 `@~/.claude/my-project-instructions.md`）
+- 支持递归导入，最大深度为 5
+- 首次从外部位置导入时会触发安全审批对话框
+- 导入指令在 markdown 代码段或代码块内不会被解析（因此在示例中记录它们是安全的）
+- 帮助避免重复，通过引用现有文档实现
+- 自动将引用的内容包含在 Claude 的上下文中
 
-## Memory Architecture
+## 记忆架构
 
-Memory in Claude Code follows a hierarchical system where different scopes serve different purposes:
+Claude Code 中的记忆遵循层级系统，不同的作用域服务于不同的目的：
 
 ```mermaid
 graph TB
@@ -206,44 +206,44 @@ graph TB
     A -->|Uses context| C
 ```
 
-## Memory Hierarchy in Claude Code
+## Claude Code 中的记忆层级
 
-Claude Code uses a multi-tier hierarchical memory system. Memory files are automatically loaded when Claude Code launches, with higher-level files taking precedence.
+Claude Code 使用多层级的层次化记忆系统。记忆文件在 Claude Code 启动时自动加载，较高层级的文件具有更高的优先级。
 
-**Complete Memory Hierarchy (in order of precedence):**
+**完整的记忆层级（按优先级排列）：**
 
-1. **Managed Policy** - Organization-wide instructions
+1. **托管策略** - 组织范围的指令
    - macOS: `/Library/Application Support/ClaudeCode/CLAUDE.md`
    - Linux/WSL: `/etc/claude-code/CLAUDE.md`
    - Windows: `C:\Program Files\ClaudeCode\CLAUDE.md`
 
-2. **Managed Drop-ins** - Alphabetically merged policy files (v2.1.83+)
-   - `managed-settings.d/` directory alongside the managed policy CLAUDE.md
-   - Files are merged in alphabetical order for modular policy management
+2. **托管插入式文件** - 按字母顺序合并的策略文件（v2.1.83+）
+   - 位于托管策略 CLAUDE.md 旁边的 `managed-settings.d/` 目录
+   - 文件按字母顺序合并，支持模块化策略管理
 
-3. **Project Memory** - Team-shared context (version controlled)
-   - `./.claude/CLAUDE.md` or `./CLAUDE.md` (in repository root)
+3. **项目记忆** - 团队共享的上下文（版本控制）
+   - `./.claude/CLAUDE.md` 或 `./CLAUDE.md`（在仓库根目录）
 
-4. **Project Rules** - Modular, topic-specific project instructions
+4. **项目规则** - 模块化、按主题划分的项目指令
    - `./.claude/rules/*.md`
 
-5. **User Memory** - Personal preferences (all projects)
+5. **用户记忆** - 个人偏好（所有项目）
    - `~/.claude/CLAUDE.md`
 
-6. **User-Level Rules** - Personal rules (all projects)
+6. **用户级规则** - 个人规则（所有项目）
    - `~/.claude/rules/*.md`
 
-7. **Local Project Memory** - Personal project-specific preferences
+7. **本地项目记忆** - 个人的项目特定偏好
    - `./CLAUDE.local.md`
 
-> **Note**: `CLAUDE.local.md` is fully supported and documented in the [official documentation](https://code.claude.com/docs/en/memory). It provides personal project-specific preferences that are not committed to version control. Add `CLAUDE.local.md` to your `.gitignore`.
+> **注意**：`CLAUDE.local.md` 已获得完整支持，并记录在[官方文档](https://code.claude.com/docs/en/memory)中。它提供不提交到版本控制的个人项目特定偏好。请将 `CLAUDE.local.md` 添加到你的 `.gitignore` 中。
 
-8. **Auto Memory** - Claude's automatic notes and learnings
+8. **自动记忆** - Claude 的自动笔记和学习成果
    - `~/.claude/projects/<project>/memory/`
 
-**Memory Discovery Behavior:**
+**记忆发现行为：**
 
-Claude searches for memory files in this order, with earlier locations taking precedence:
+Claude 按此顺序搜索记忆文件，靠前的位置具有更高的优先级：
 
 ```mermaid
 graph TD
@@ -270,9 +270,9 @@ graph TD
     style I fill:#e1f5fe,stroke:#333,color:#333
 ```
 
-## Excluding CLAUDE.md Files with `claudeMdExcludes`
+## 使用 `claudeMdExcludes` 排除 CLAUDE.md 文件
 
-In large monorepos, some CLAUDE.md files may be irrelevant to your current work. The `claudeMdExcludes` setting lets you skip specific CLAUDE.md files so they are not loaded into context:
+在大型单仓库中，某些 CLAUDE.md 文件可能与你当前的工作无关。`claudeMdExcludes` 设置允许你跳过特定的 CLAUDE.md 文件，使其不被加载到上下文中：
 
 ```jsonc
 // In ~/.claude/settings.json or .claude/settings.json
@@ -284,39 +284,39 @@ In large monorepos, some CLAUDE.md files may be irrelevant to your current work.
 }
 ```
 
-Patterns are matched against paths relative to the project root. This is particularly useful for:
+模式相对于项目根目录的路径进行匹配。这在以下场景特别有用：
 
-- Monorepos with many sub-projects, where only some are relevant
-- Repositories that contain vendored or third-party CLAUDE.md files
-- Reducing noise in Claude's context window by excluding stale or unrelated instructions
+- 包含多个子项目的单仓库，其中仅部分与当前工作相关
+- 包含第三方或供应商提供的 CLAUDE.md 文件的仓库
+- 通过排除过时或不相关的指令来减少 Claude 上下文窗口中的噪音
 
-## Settings File Hierarchy
+## 设置文件层级
 
-Claude Code settings (including `autoMemoryDirectory`, `claudeMdExcludes`, and other configuration) are resolved from a five-level hierarchy, with higher levels taking precedence:
+Claude Code 的设置（包括 `autoMemoryDirectory`、`claudeMdExcludes` 和其他配置）从五级层次结构中解析，较高层级具有更高的优先级：
 
-| Level | Location | Scope |
+| 层级 | 位置 | 作用域 |
 |-------|----------|-------|
-| 1 (Highest) | Managed policy (system-level) | Organization-wide enforcement |
-| 2 | `managed-settings.d/` (v2.1.83+) | Modular policy drop-ins, merged alphabetically |
-| 3 | `~/.claude/settings.json` | User preferences |
-| 4 | `.claude/settings.json` | Project-level (committed to git) |
-| 5 (Lowest) | `.claude/settings.local.json` | Local overrides (git-ignored) |
+| 1（最高） | 托管策略（系统级） | 组织范围强制执行 |
+| 2 | `managed-settings.d/`（v2.1.83+） | 模块化策略插入式文件，按字母顺序合并 |
+| 3 | `~/.claude/settings.json` | 用户偏好 |
+| 4 | `.claude/settings.json` | 项目级（提交到 git） |
+| 5（最低） | `.claude/settings.local.json` | 本地覆盖（被 git 忽略） |
 
-**Platform-specific configuration (v2.1.51+):**
+**平台特定配置（v2.1.51+）：**
 
-Settings can also be configured via:
-- **macOS**: Property list (plist) files
-- **Windows**: Windows Registry
+设置还可以通过以下方式配置：
+- **macOS**：属性列表（plist）文件
+- **Windows**：Windows 注册表
 
-These platform-native mechanisms are read alongside JSON settings files and follow the same precedence rules.
+这些平台原生机制与 JSON 设置文件同时读取，并遵循相同的优先级规则。
 
-> **Note (v2.1.119)**: `/config` changes now persist to `~/.claude/settings.json`. Values written via `/config` participate in the normal project/local/policy precedence chain described above — they are no longer session-only. Use `/config` for interactive edits and edit `settings.json` files directly for scripted or managed configuration.
+> **注意（v2.1.119）**：`/config` 的更改现在会持久化到 `~/.claude/settings.json`。通过 `/config` 写入的值参与上述正常的项目/本地/策略优先级链——它们不再仅限于会话。使用 `/config` 进行交互式编辑，直接编辑 `settings.json` 文件进行脚本化或托管配置。
 
-### Retention and Cleanup Settings
+### 保留和清理设置
 
-| Setting | Type | Default | Description |
+| 设置 | 类型 | 默认值 | 描述 |
 |---------|------|---------|-------------|
-| `cleanupPeriodDays` | integer (days) | 30 | Retention window for on-disk artifacts. **As of v2.1.117**, it applies to all four of: checkpoints (`~/.claude/checkpoints/`), tasks (`~/.claude/tasks/`), shell-snapshots (`~/.claude/shell-snapshots/`), and backups (`~/.claude/backups/`). Files older than the window are pruned at startup. |
+| `cleanupPeriodDays` | 整数（天） | 30 | 磁盘上工件的保留窗口。**自 v2.1.117 起**，适用于以下所有四项：检查点（`~/.claude/checkpoints/`）、任务（`~/.claude/tasks/`）、shell 快照（`~/.claude/shell-snapshots/`）和备份（`~/.claude/backups/`）。超过保留窗口的文件在启动时被清理。 |
 
 ```jsonc
 // ~/.claude/settings.json
@@ -325,14 +325,14 @@ These platform-native mechanisms are read alongside JSON settings files and foll
 }
 ```
 
-### Attribution, Voice, and PR URL Settings
+### 署名、语音和 PR URL 设置
 
-| Setting | Type | Description |
+| 设置 | 类型 | 描述 |
 |---------|------|-------------|
-| `attribution.commit` | boolean | Adds the `Co-Authored-By: Claude` trailer to commits Claude creates. Replaces the deprecated `includeCoAuthoredBy` flag. |
-| `attribution.pr` | boolean | Adds Claude attribution to pull request descriptions. Replaces the deprecated `includeCoAuthoredBy` flag for PRs. |
-| `voice.enabled` | boolean | Enables push-to-talk voice dictation (`/voice`). Replaces the deprecated `voiceEnabled` flag. |
-| `prUrlTemplate` | string | **New in v2.1.119.** Custom URL template for the footer PR badge; useful for GitLab, Bitbucket, or internal code-review platforms. Supports `{{owner}}`, `{{repo}}`, and `{{number}}` placeholders. |
+| `attribution.commit` | 布尔值 | 在 Claude 创建的提交中添加 `Co-Authored-By: Claude` 尾注。替代已弃用的 `includeCoAuthoredBy` 标志。 |
+| `attribution.pr` | 布尔值 | 在拉取请求描述中添加 Claude 署名。替代已弃用的用于 PR 的 `includeCoAuthoredBy` 标志。 |
+| `voice.enabled` | 布尔值 | 启用按键说话语音输入（`/voice`）。替代已弃用的 `voiceEnabled` 标志。 |
+| `prUrlTemplate` | 字符串 | **v2.1.119 新增。** PR 页脚徽章的自定义 URL 模板；适用于 GitLab、Bitbucket 或内部代码审查平台。支持 `{{owner}}`、`{{repo}}` 和 `{{number}}` 占位符。 |
 
 ```jsonc
 // ~/.claude/settings.json
@@ -348,18 +348,18 @@ These platform-native mechanisms are read alongside JSON settings files and foll
 }
 ```
 
-#### Deprecated setting names
+#### 已弃用的设置名称
 
-The following legacy setting keys still work but are deprecated. Prefer the replacements above.
+以下旧版设置键仍然有效但已弃用。请优先使用上述替代项。
 
-| Deprecated key | Replacement | Notes |
+| 已弃用的键 | 替代项 | 说明 |
 |----------------|-------------|-------|
-| `includeCoAuthoredBy` | `attribution.commit` / `attribution.pr` | The old single flag is split into separate commit and PR switches. Users on older installs can keep the legacy key; new projects should use the nested form. |
-| `voiceEnabled` | `voice.enabled` | Grouped under the `voice` namespace alongside future voice-related options. |
+| `includeCoAuthoredBy` | `attribution.commit` / `attribution.pr` | 旧的单一标志被拆分为单独的提交和 PR 开关。使用旧版安装的用户可以保留旧键；新项目应使用嵌套形式。 |
+| `voiceEnabled` | `voice.enabled` | 归入 `voice` 命名空间，与未来的语音相关选项放在一起。 |
 
-## Modular Rules System
+## 模块化规则系统
 
-Create organized, path-specific rules using the `.claude/rules/` directory structure. Rules can be defined at both the project level and user level:
+使用 `.claude/rules/` 目录结构创建有组织的、路径特定的规则。规则可以在项目级和用户级定义：
 
 ```
 your-project/
@@ -380,11 +380,11 @@ your-project/
     └── preferred-patterns.md
 ```
 
-Rules are discovered recursively within the `rules/` directory, including any subdirectories. User-level rules at `~/.claude/rules/` are loaded before project-level rules, allowing personal defaults that projects can override.
+规则在 `rules/` 目录中递归发现，包括任何子目录。`~/.claude/rules/` 中的用户级规则在项目级规则之前加载，允许项目覆盖个人默认值。
 
-### Path-Specific Rules with YAML Frontmatter
+### 使用 YAML Frontmatter 的路径特定规则
 
-Define rules that apply only to specific file paths:
+定义仅适用于特定文件路径的规则：
 
 ```markdown
 ---
@@ -399,38 +399,38 @@ paths: src/api/**/*.ts
 - Include error handling for all operations
 ```
 
-**Glob Pattern Examples:**
+**Glob 模式示例：**
 
-- `**/*.ts` - All TypeScript files
-- `src/**/*` - All files under src/
-- `src/**/*.{ts,tsx}` - Multiple extensions
-- `{src,lib}/**/*.ts, tests/**/*.test.ts` - Multiple patterns
+- `**/*.ts` - 所有 TypeScript 文件
+- `src/**/*` - src/ 下的所有文件
+- `src/**/*.{ts,tsx}` - 多种扩展名
+- `{src,lib}/**/*.ts, tests/**/*.test.ts` - 多种模式
 
-### Subdirectories and Symlinks
+### 子目录和符号链接
 
-Rules in `.claude/rules/` support two organizational features:
+`.claude/rules/` 中的规则支持两种组织功能：
 
-- **Subdirectories**: Rules are discovered recursively, so you can organize them into topic-based folders (e.g., `rules/api/`, `rules/testing/`, `rules/security/`)
-- **Symlinks**: Symlinks are supported for sharing rules across multiple projects. For example, you can symlink a shared rule file from a central location into each project's `.claude/rules/` directory
+- **子目录**：规则递归发现，因此你可以将它们组织到基于主题的文件夹中（例如 `rules/api/`、`rules/testing/`、`rules/security/`）
+- **符号链接**：支持符号链接以在多个项目间共享规则。例如，你可以将共享规则文件从中央位置符号链接到每个项目的 `.claude/rules/` 目录
 
-## Memory Locations Table
+## 记忆位置表
 
-| Location | Scope | Priority | Shared | Access | Best For |
+| 位置 | 作用域 | 优先级 | 共享范围 | 访问方式 | 最适用于 |
 |----------|-------|----------|--------|--------|----------|
-| `/Library/Application Support/ClaudeCode/CLAUDE.md` (macOS) | Managed Policy | 1 (Highest) | Organization | System | Company-wide policies |
-| `/etc/claude-code/CLAUDE.md` (Linux/WSL) | Managed Policy | 1 (Highest) | Organization | System | Organization standards |
-| `C:\Program Files\ClaudeCode\CLAUDE.md` (Windows) | Managed Policy | 1 (Highest) | Organization | System | Corporate guidelines |
-| `managed-settings.d/*.md` (alongside policy) | Managed Drop-ins | 1.5 | Organization | System | Modular policy files (v2.1.83+) |
-| `./CLAUDE.md` or `./.claude/CLAUDE.md` | Project Memory | 2 | Team | Git | Team standards, shared architecture |
-| `./.claude/rules/*.md` | Project Rules | 3 | Team | Git | Path-specific, modular rules |
-| `~/.claude/CLAUDE.md` | User Memory | 4 | Individual | Filesystem | Personal preferences (all projects) |
-| `~/.claude/rules/*.md` | User Rules | 5 | Individual | Filesystem | Personal rules (all projects) |
-| `./CLAUDE.local.md` | Project Local | 6 | Individual | Git (ignored) | Personal project-specific preferences |
-| `~/.claude/projects/<project>/memory/` | Auto Memory | 7 (Lowest) | Individual | Filesystem | Claude's automatic notes and learnings |
+| `/Library/Application Support/ClaudeCode/CLAUDE.md` (macOS) | 托管策略 | 1（最高） | 组织 | 系统 | 公司范围的策略 |
+| `/etc/claude-code/CLAUDE.md` (Linux/WSL) | 托管策略 | 1（最高） | 组织 | 系统 | 组织标准 |
+| `C:\Program Files\ClaudeCode\CLAUDE.md` (Windows) | 托管策略 | 1（最高） | 组织 | 系统 | 企业指南 |
+| `managed-settings.d/*.md`（与策略同级） | 托管插入式文件 | 1.5 | 组织 | 系统 | 模块化策略文件（v2.1.83+） |
+| `./CLAUDE.md` 或 `./.claude/CLAUDE.md` | 项目记忆 | 2 | 团队 | Git | 团队标准、共享架构 |
+| `./.claude/rules/*.md` | 项目规则 | 3 | 团队 | Git | 路径特定的模块化规则 |
+| `~/.claude/CLAUDE.md` | 用户记忆 | 4 | 个人 | 文件系统 | 个人偏好（所有项目） |
+| `~/.claude/rules/*.md` | 用户规则 | 5 | 个人 | 文件系统 | 个人规则（所有项目） |
+| `./CLAUDE.local.md` | 项目本地 | 6 | 个人 | Git（忽略） | 个人的项目特定偏好 |
+| `~/.claude/projects/<project>/memory/` | 自动记忆 | 7（最低） | 个人 | 文件系统 | Claude 的自动笔记和学习成果 |
 
-## Memory Update Lifecycle
+## 记忆更新生命周期
 
-Here's how memory updates flow through your Claude Code sessions:
+以下是记忆更新在 Claude Code 会话中的流转方式：
 
 ```mermaid
 sequenceDiagram
@@ -449,19 +449,19 @@ sequenceDiagram
     Claude-->>User: "Memory saved!"
 ```
 
-## Auto Memory
+## 自动记忆
 
-Auto memory is a persistent directory where Claude automatically records learnings, patterns, and insights as it works with your project. Unlike CLAUDE.md files which you write and maintain manually, auto memory is written by Claude itself during sessions.
+自动记忆是一个持久化目录，Claude 在与你的项目协作过程中自动记录学习成果、模式和洞察。与你手动编写和维护的 CLAUDE.md 文件不同，自动记忆是 Claude 自己在会话期间写入的。
 
-### How Auto Memory Works
+### 自动记忆的工作原理
 
-- **Location**: `~/.claude/projects/<project>/memory/`
-- **Entrypoint**: `MEMORY.md` serves as the main file in the auto memory directory
-- **Topic files**: Optional additional files for specific subjects (e.g., `debugging.md`, `api-conventions.md`)
-- **Loading behavior**: The first 200 lines of `MEMORY.md` (or first 25KB, whichever comes first) are loaded into context at session start. Topic files are loaded on demand, not at startup.
-- **Read/write**: Claude reads and writes memory files during sessions as it discovers patterns and project-specific knowledge
+- **位置**：`~/.claude/projects/<project>/memory/`
+- **入口文件**：`MEMORY.md` 作为自动记忆目录中的主文件
+- **主题文件**：可选的附加文件，用于特定主题（例如 `debugging.md`、`api-conventions.md`）
+- **加载行为**：`MEMORY.md` 的前 200 行（或前 25KB，以先到者为准）在会话开始时加载到上下文中。主题文件按需加载，不会在启动时加载。
+- **读写**：Claude 在会话期间发现模式和项目特定知识时读取和写入记忆文件
 
-### Auto Memory Architecture
+### 自动记忆架构
 
 ```mermaid
 graph TD
@@ -486,7 +486,7 @@ graph TD
     style I fill:#f3e5f5,stroke:#333,color:#333
 ```
 
-### Auto Memory Directory Structure
+### 自动记忆目录结构
 
 ```
 ~/.claude/projects/<project>/memory/
@@ -496,17 +496,17 @@ graph TD
 └── testing-patterns.md    # Topic file (loaded on demand)
 ```
 
-### Version Requirement
+### 版本要求
 
-Auto memory requires **Claude Code v2.1.59 or later**. If you are on an older version, upgrade first:
+自动记忆需要 **Claude Code v2.1.59 或更高版本**。如果你使用的是旧版本，请先升级：
 
 ```bash
 npm install -g @anthropic-ai/claude-code@latest
 ```
 
-### Custom Auto Memory Directory
+### 自定义自动记忆目录
 
-By default, auto memory is stored in `~/.claude/projects/<project>/memory/`. You can change this location using the `autoMemoryDirectory` setting (available since **v2.1.74**):
+默认情况下，自动记忆存储在 `~/.claude/projects/<project>/memory/`。你可以使用 `autoMemoryDirectory` 设置更改此位置（自 **v2.1.74** 起可用）：
 
 ```jsonc
 // In ~/.claude/settings.json or .claude/settings.local.json (user/local settings only)
@@ -515,21 +515,21 @@ By default, auto memory is stored in `~/.claude/projects/<project>/memory/`. You
 }
 ```
 
-> **Note**: `autoMemoryDirectory` can only be set in user-level (`~/.claude/settings.json`) or local settings (`.claude/settings.local.json`), not in project or managed policy settings.
+> **注意**：`autoMemoryDirectory` 只能在用户级（`~/.claude/settings.json`）或本地设置（`.claude/settings.local.json`）中设置，不能在项目或托管策略设置中设置。
 
-This is useful when you want to:
+这在以下场景很有用：
 
-- Store auto memory in a shared or synced location
-- Separate auto memory from the default Claude configuration directory
-- Use a project-specific path outside the default hierarchy
+- 将自动记忆存储在共享或同步的位置
+- 将自动记忆与默认的 Claude 配置目录分开
+- 在默认层级之外使用项目特定路径
 
-### Worktree and Repository Sharing
+### 工作树和仓库共享
 
-All worktrees and subdirectories within the same git repository share a single auto memory directory. This means switching between worktrees or working in different subdirectories of the same repo will read and write to the same memory files.
+同一 git 仓库内的所有工作树和子目录共享单个自动记忆目录。这意味着在工作树之间切换或在同一仓库的不同子目录中工作时，将读取和写入相同的记忆文件。
 
-### Subagent Memory
+### 子代理记忆
 
-Subagents (spawned via tools like Task or parallel execution) can have their own memory context. Use the `memory` frontmatter field in the subagent definition to specify which memory scopes to load:
+子代理（通过 Task 或并行执行等工具生成）可以拥有自己的记忆上下文。在子代理定义中使用 `memory` frontmatter 字段来指定要加载的记忆作用域：
 
 ```yaml
 memory: user      # Load user-level memory only
@@ -537,19 +537,19 @@ memory: project   # Load project-level memory only
 memory: local     # Load local memory only
 ```
 
-This allows subagents to operate with focused context rather than inheriting the full memory hierarchy.
+这允许子代理使用聚焦的上下文运行，而不是继承完整的记忆层级。
 
-> **Note**: Subagents can also maintain their own auto memory. See the [official subagent memory documentation](https://code.claude.com/docs/en/sub-agents#enable-persistent-memory) for details.
+> **注意**：子代理也可以维护自己的自动记忆。详情请参阅[官方子代理记忆文档](https://code.claude.com/docs/en/sub-agents#enable-persistent-memory)。
 
-### Controlling Auto Memory
+### 控制自动记忆
 
-Auto memory can be controlled via the `CLAUDE_CODE_DISABLE_AUTO_MEMORY` environment variable:
+自动记忆可以通过 `CLAUDE_CODE_DISABLE_AUTO_MEMORY` 环境变量进行控制：
 
-| Value | Behavior |
+| 值 | 行为 |
 |-------|----------|
-| `0` | Force auto memory **on** |
-| `1` | Force auto memory **off** |
-| *(unset)* | Default behavior (auto memory enabled) |
+| `0` | 强制**开启**自动记忆 |
+| `1` | 强制**关闭**自动记忆 |
+| *（未设置）* | 默认行为（自动记忆已启用） |
 
 ```bash
 # Disable auto memory for a session
@@ -559,29 +559,29 @@ CLAUDE_CODE_DISABLE_AUTO_MEMORY=1 claude
 CLAUDE_CODE_DISABLE_AUTO_MEMORY=0 claude
 ```
 
-## Additional Directories with `--add-dir`
+## 使用 `--add-dir` 添加额外目录
 
-The `--add-dir` flag allows Claude Code to load CLAUDE.md files from additional directories beyond the current working directory. This is useful for monorepos or multi-project setups where context from other directories is relevant.
+`--add-dir` 标志允许 Claude Code 从当前工作目录以外的额外目录加载 CLAUDE.md 文件。这对于单仓库或多项目设置非常有用，因为来自其他目录的上下文可能是相关的。
 
-To enable this feature, set the environment variable:
+要启用此功能，请设置环境变量：
 
 ```bash
 CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1
 ```
 
-Then launch Claude Code with the flag:
+然后使用该标志启动 Claude Code：
 
 ```bash
 claude --add-dir /path/to/other/project
 ```
 
-Claude will load CLAUDE.md from the specified additional directory alongside the memory files from your current working directory.
+Claude 将从指定的额外目录加载 CLAUDE.md，同时加载当前工作目录中的记忆文件。
 
-## Practical Examples
+## 实践示例
 
-### Example 1: Project Memory Structure
+### 示例 1：项目记忆结构
 
-**File:** `./CLAUDE.md`
+**文件：** `./CLAUDE.md`
 
 ```markdown
 # Project Configuration
@@ -674,9 +674,9 @@ Claude will load CLAUDE.md from the specified additional directory alongside the
 - Admin Panel: `/projects/admin`
 ```
 
-### Example 2: Directory-Specific Memory
+### 示例 2：目录特定记忆
 
-**File:** `./src/api/CLAUDE.md`
+**文件：** `./src/api/CLAUDE.md`
 
 ````markdown
 # API Module Standards
@@ -742,9 +742,9 @@ Error responses:
 - Tag cache keys with resource type
 ````
 
-### Example 3: Personal Memory
+### 示例 3：个人记忆
 
-**File:** `~/.claude/CLAUDE.md`
+**文件：** `~/.claude/CLAUDE.md`
 
 ```markdown
 # My Development Preferences
@@ -808,19 +808,19 @@ I organize my projects as:
 - **Test Framework**: Jest with React Testing Library
 ```
 
-_My Test_
-Ask Claude to save a new rule
+_我的测试_
+要求 Claude 保存一条新规则
 
-![Ask Claude to save a new rule](memory-ask-claude.png)
-Claude has not save the rule because I did not have any `Claude.md` file anywhere. Then asked Claude to confirm the location.
+![要求 Claude 保存一条新规则](memory-ask-claude.png)
+Claude 没有保存规则，因为我在任何地方都没有 `Claude.md` 文件。然后要求 Claude 确认位置。
 
-![Ask Claude to save a new rule](memory-saved.png)
+![要求 Claude 保存一条新规则](memory-saved.png)
 
-### Example 4: Memory Update During Session
+### 示例 4：会话中更新记忆
 
-You can add new rules to memory during an active Claude Code session. There are two ways to do this:
+你可以在活跃的 Claude Code 会话中向记忆添加新规则。有两种方式：
 
-#### Method 1: Direct Request
+#### 方法 1：直接请求
 
 ```markdown
 User: Remember that I prefer using React hooks instead of class components
@@ -845,9 +845,9 @@ Added to ./CLAUDE.md:
 - Use useMemo for expensive computations
 ```
 
-#### Method 2: Using "# new rule into memory" Pattern
+#### 方法 2：使用"# new rule into memory"模式
 
-You can also use the explicit pattern "# new rule into memory" to trigger memory updates:
+你也可以使用显式的"# new rule into memory"模式来触发记忆更新：
 
 ```markdown
 User: # new rule into memory
@@ -870,28 +870,28 @@ Added to ./CLAUDE.md:
 - Return 400 status with validation errors
 ```
 
-#### Tips for Adding Memory
+#### 添加记忆的技巧
 
-- Be specific and actionable in your rules
-- Group related rules together under a section header
-- Update existing sections instead of duplicating content
-- Choose the appropriate memory scope (project vs. personal)
+- 规则要具体且可操作
+- 将相关规则归入一个章节标题下
+- 更新现有章节而非重复内容
+- 选择合适的记忆作用域（项目 vs. 个人）
 
-## Memory Features Comparison
+## 记忆功能对比
 
-| Feature | Claude Web/Desktop | Claude Code (CLAUDE.md) |
+| 功能 | Claude Web/Desktop | Claude Code (CLAUDE.md) |
 |---------|-------------------|------------------------|
-| Auto-synthesis | ✅ Every 24h | ✅ Auto memory |
-| Cross-project | ✅ Shared | ❌ Project-specific |
-| Team access | ✅ Shared projects | ✅ Git-tracked |
-| Searchable | ✅ Built-in | ✅ Through `/memory` |
-| Editable | ✅ In-chat | ✅ Direct file edit |
-| Import/Export | ✅ Yes | ✅ Copy/paste |
-| Persistent | ✅ 24h+ | ✅ Indefinite |
+| 自动综合 | ✅ 每 24 小时 | ✅ 自动记忆 |
+| 跨项目 | ✅ 共享 | ❌ 项目特定 |
+| 团队访问 | ✅ 共享项目 | ✅ Git 追踪 |
+| 可搜索 | ✅ 内置 | ✅ 通过 `/memory` |
+| 可编辑 | ✅ 在对话中 | ✅ 直接编辑文件 |
+| 导入/导出 | ✅ 是 | ✅ 复制/粘贴 |
+| 持久性 | ✅ 24 小时以上 | ✅ 无限期 |
 
-### Memory in Claude Web/Desktop
+### Claude Web/Desktop 中的记忆
 
-#### Memory Synthesis Timeline
+#### 记忆综合时间线
 
 ```mermaid
 graph LR
@@ -902,7 +902,7 @@ graph LR
     E -->|24 hours later| F["Memory Refreshed"]
 ```
 
-**Example Memory Summary:**
+**记忆摘要示例：**
 
 ```markdown
 ## Claude's Memory of User
@@ -932,71 +932,71 @@ graph LR
 - Document architecture
 ```
 
-## Best Practices
+## 最佳实践
 
-### Do's - What To Include
+### 应做之事 - 应包含的内容
 
-- **Be specific and detailed**: Use clear, detailed instructions rather than vague guidance
-  - ✅ Good: "Use 2-space indentation for all JavaScript files"
-  - ❌ Avoid: "Follow best practices"
+- **具体且详细**：使用清晰详细的指令，而非模糊的指导
+  - ✅ 好的做法："所有 JavaScript 文件使用 2 空格缩进"
+  - ❌ 避免："遵循最佳实践"
 
-- **Keep organized**: Structure memory files with clear markdown sections and headings
+- **保持有序**：使用清晰的 markdown 章节和标题来组织记忆文件
 
-- **Use appropriate hierarchy levels**:
-  - **Managed policy**: Company-wide policies, security standards, compliance requirements
-  - **Project memory**: Team standards, architecture, coding conventions (commit to git)
-  - **User memory**: Personal preferences, communication style, tooling choices
-  - **Directory memory**: Module-specific rules and overrides
+- **使用合适的层级**：
+  - **托管策略**：公司范围的策略、安全标准、合规要求
+  - **项目记忆**：团队标准、架构、编码约定（提交到 git）
+  - **用户记忆**：个人偏好、沟通风格、工具选择
+  - **目录记忆**：模块特定的规则和覆盖
 
-- **Leverage imports**: Use `@path/to/file` syntax to reference existing documentation
-  - Supports up to 5 levels of recursive nesting
-  - Avoids duplication across memory files
-  - Example: `See @README.md for project overview`
+- **善用导入**：使用 `@path/to/file` 语法引用现有文档
+  - 支持最多 5 层递归嵌套
+  - 避免跨记忆文件的重复
+  - 示例：`See @README.md for project overview`
 
-- **Document frequent commands**: Include commands you use repeatedly to save time
+- **记录常用命令**：包含你经常使用的命令以节省时间
 
-- **Version control project memory**: Commit project-level CLAUDE.md files to git for team benefit
+- **版本控制项目记忆**：将项目级 CLAUDE.md 文件提交到 git 以惠及团队
 
-- **Review periodically**: Update memory regularly as projects evolve and requirements change
+- **定期审查**：随着项目发展和需求变化定期更新记忆
 
-- **Provide concrete examples**: Include code snippets and specific scenarios
+- **提供具体示例**：包含代码片段和具体场景
 
-### Don'ts - What To Avoid
+### 不应做之事 - 应避免的内容
 
-- **Don't store secrets**: Never include API keys, passwords, tokens, or credentials
+- **不要存储密钥**：永远不要包含 API 密钥、密码、令牌或凭据
 
-- **Don't include sensitive data**: No PII, private information, or proprietary secrets
+- **不要包含敏感数据**：不要包含个人身份信息、私人信息或专有机密
 
-- **Don't duplicate content**: Use imports (`@path`) to reference existing documentation instead
+- **不要重复内容**：使用导入（`@path`）引用现有文档
 
-- **Don't be vague**: Avoid generic statements like "follow best practices" or "write good code"
+- **不要模糊**：避免"遵循最佳实践"或"编写好代码"等笼统陈述
 
-- **Don't make it too long**: Keep individual memory files focused and under 500 lines
+- **不要过长**：保持单个记忆文件聚焦且不超过 500 行
 
-- **Don't over-organize**: Use hierarchy strategically; don't create excessive subdirectory overrides
+- **不要过度组织**：策略性地使用层级；不要创建过多的子目录覆盖
 
-- **Don't forget to update**: Stale memory can cause confusion and outdated practices
+- **不要忘记更新**：过时的记忆可能导致混乱和过时的做法
 
-- **Don't exceed nesting limits**: Memory imports support up to 5 levels of nesting
+- **不要超过嵌套限制**：记忆导入最多支持 5 层嵌套
 
-### Memory Management Tips
+### 记忆管理技巧
 
-**Choose the right memory level:**
+**选择合适的记忆层级：**
 
-| Use Case | Memory Level | Rationale |
+| 使用场景 | 记忆层级 | 原因 |
 |----------|-------------|-----------|
-| Company security policy | Managed Policy | Applies to all projects organization-wide |
-| Team code style guide | Project | Shared with team via git |
-| Your preferred editor shortcuts | User | Personal preference, not shared |
-| API module standards | Directory | Specific to that module only |
+| 公司安全策略 | 托管策略 | 适用于组织范围内的所有项目 |
+| 团队代码风格指南 | 项目 | 通过 git 与团队共享 |
+| 你偏好的编辑器快捷键 | 用户 | 个人偏好，不共享 |
+| API 模块标准 | 目录 | 仅适用于该模块 |
 
-**Quick update workflow:**
+**快速更新工作流程：**
 
-1. For single rules: Use `#` prefix in conversation
-2. For multiple changes: Use `/memory` to open editor
-3. For initial setup: Use `/init` to create template
+1. 对于单条规则：在对话中使用 `#` 前缀
+2. 对于多项更改：使用 `/memory` 打开编辑器
+3. 对于初始设置：使用 `/init` 创建模板
 
-**Import best practices:**
+**导入最佳实践：**
 
 ```markdown
 # Good: Reference existing docs
@@ -1008,45 +1008,45 @@ graph LR
 # Instead of copying README content into CLAUDE.md, just import it
 ```
 
-## Installation Instructions
+## 安装说明
 
-### Setup Project Memory
+### 设置项目记忆
 
-#### Method 1: Using `/init` Command (Recommended)
+#### 方法 1：使用 `/init` 命令（推荐）
 
-The fastest way to set up project memory:
+设置项目记忆的最快方式：
 
-1. **Navigate to your project directory:**
+1. **导航到你的项目目录：**
    ```bash
    cd /path/to/your/project
    ```
 
-2. **Run the init command in Claude Code:**
+2. **在 Claude Code 中运行 init 命令：**
    ```bash
    /init
    ```
 
-3. **Claude will create and populate CLAUDE.md** with a template structure
+3. **Claude 将创建并填充 CLAUDE.md**，提供模板结构
 
-4. **Customize the generated file** to match your project needs
+4. **自定义生成的文件**以匹配你的项目需求
 
-5. **Commit to git:**
+5. **提交到 git：**
    ```bash
    git add CLAUDE.md
    git commit -m "Initialize project memory with /init"
    ```
 
-#### Method 2: Manual Creation
+#### 方法 2：手动创建
 
-If you prefer manual setup:
+如果你偏好手动设置：
 
-1. **Create a CLAUDE.md in your project root:**
+1. **在项目根目录创建 CLAUDE.md：**
    ```bash
    cd /path/to/your/project
    touch CLAUDE.md
    ```
 
-2. **Add project standards:**
+2. **添加项目标准：**
    ```bash
    cat > CLAUDE.md << 'EOF'
    # Project Configuration
@@ -1063,15 +1063,15 @@ If you prefer manual setup:
    EOF
    ```
 
-3. **Commit to git:**
+3. **提交到 git：**
    ```bash
    git add CLAUDE.md
    git commit -m "Add project memory configuration"
    ```
 
-#### Method 3: Quick Updates with `#`
+#### 方法 3：使用 `#` 快速更新
 
-Once CLAUDE.md exists, add rules quickly during conversations:
+一旦 CLAUDE.md 存在，可在对话中快速添加规则：
 
 ```markdown
 # Use semantic versioning for all releases
@@ -1081,21 +1081,21 @@ Once CLAUDE.md exists, add rules quickly during conversations:
 # Prefer composition over inheritance
 ```
 
-Claude will prompt you to choose which memory file to update.
+Claude 会提示你选择要更新的记忆文件。
 
-### Setup Personal Memory
+### 设置个人记忆
 
-1. **Create ~/.claude directory:**
+1. **创建 ~/.claude 目录：**
    ```bash
    mkdir -p ~/.claude
    ```
 
-2. **Create personal CLAUDE.md:**
+2. **创建个人 CLAUDE.md：**
    ```bash
    touch ~/.claude/CLAUDE.md
    ```
 
-3. **Add your preferences:**
+3. **添加你的偏好：**
    ```bash
    cat > ~/.claude/CLAUDE.md << 'EOF'
    # My Development Preferences
@@ -1110,15 +1110,15 @@ Claude will prompt you to choose which memory file to update.
    EOF
    ```
 
-### Setup Directory-Specific Memory
+### 设置目录特定记忆
 
-1. **Create memory for specific directories:**
+1. **为特定目录创建记忆：**
    ```bash
    mkdir -p /path/to/directory/.claude
    touch /path/to/directory/CLAUDE.md
    ```
 
-2. **Add directory-specific rules:**
+2. **添加目录特定规则：**
    ```bash
    cat > /path/to/directory/CLAUDE.md << 'EOF'
    # [Directory Name] Standards
@@ -1129,15 +1129,15 @@ Claude will prompt you to choose which memory file to update.
    EOF
    ```
 
-3. **Commit to version control:**
+3. **提交到版本控制：**
    ```bash
    git add /path/to/directory/CLAUDE.md
    git commit -m "Add [directory] memory configuration"
    ```
 
-### Verify Setup
+### 验证设置
 
-1. **Check memory locations:**
+1. **检查记忆位置：**
    ```bash
    # Project root memory
    ls -la ./CLAUDE.md
@@ -1146,63 +1146,55 @@ Claude will prompt you to choose which memory file to update.
    ls -la ~/.claude/CLAUDE.md
    ```
 
-2. **Claude Code will automatically load** these files when starting a session
+2. **Claude Code 在启动会话时会自动加载**这些文件
 
-3. **Test with Claude Code** by starting a new session in your project
+3. **使用 Claude Code 测试**，在你的项目中启动一个新会话
 
-## Official Documentation
+## 官方文档
 
-For the most up-to-date information, refer to the official Claude Code documentation:
+如需了解最新信息，请参阅 Claude Code 官方文档：
 
-- **[Memory Documentation](https://code.claude.com/docs/en/memory)** - Complete memory system reference
-- **[Slash Commands Reference](https://code.claude.com/docs/en/interactive-mode)** - All built-in commands including `/init` and `/memory`
-- **[CLI Reference](https://code.claude.com/docs/en/cli-reference)** - Command-line interface documentation
+- **[记忆文档](https://code.claude.com/docs/en/memory)** - 完整的记忆系统参考
+- **[斜杠命令参考](https://code.claude.com/docs/en/interactive-mode)** - 所有内置命令，包括 `/init` 和 `/memory`
+- **[CLI 参考](https://code.claude.com/docs/en/cli-reference)** - 命令行界面文档
 
-### Key Technical Details from Official Docs
+### 来自官方文档的关键技术细节
 
-**Memory Loading:**
+**记忆加载：**
 
-- All memory files are automatically loaded when Claude Code launches
-- Claude traverses upward from the current working directory to discover CLAUDE.md files
-- Subtree files are discovered and loaded contextually when accessing those directories
+- 所有记忆文件在 Claude Code 启动时自动加载
+- Claude 从当前工作目录向上遍历以发现 CLAUDE.md 文件
+- 子树文件在访问这些目录时会被上下文性地发现和加载
 
-**Import Syntax:**
+**导入语法：**
 
-- Use `@path/to/file` to include external content (e.g., `@~/.claude/my-project-instructions.md`)
-- Supports both relative and absolute paths
-- Recursive imports supported with a maximum depth of 5
-- First-time external imports trigger an approval dialog
-- Not evaluated inside markdown code spans or code blocks
-- Automatically includes referenced content in Claude's context
+- 使用 `@path/to/file` 包含外部内容（例如 `@~/.claude/my-project-instructions.md`）
+- 支持相对路径和绝对路径
+- 支持递归导入，最大深度为 5
+- 首次外部导入会触发审批对话框
+- 在 markdown 代码段或代码块内不会被解析
+- 自动将引用的内容包含在 Claude 的上下文中
 
-**Memory Hierarchy Precedence:**
+**记忆层级优先级：**
 
-1. Managed Policy (highest precedence)
-2. Managed Drop-ins (`managed-settings.d/`, v2.1.83+)
-3. Project Memory
-4. Project Rules (`.claude/rules/`)
-5. User Memory
-6. User-Level Rules (`~/.claude/rules/`)
-7. Local Project Memory
-8. Auto Memory (lowest precedence)
+1. 托管策略（最高优先级）
+2. 托管插入式文件（`managed-settings.d/`，v2.1.83+）
+3. 项目记忆
+4. 项目规则（`.claude/rules/`）
+5. 用户记忆
+6. 用户级规则（`~/.claude/rules/`）
+7. 本地项目记忆
+8. 自动记忆（最低优先级）
 
-## Related Concepts Links
+## 相关概念链接
 
-### Integration Points
-- [MCP Protocol](../05-mcp/) - Live data access alongside memory
-- [Slash Commands](../01-slash-commands/) - Session-specific shortcuts
-- [Skills](../03-skills/) - Automated workflows with memory context
+### 集成点
+- [MCP 协议](../05-mcp/) - 与记忆并用的实时数据访问
+- [斜杠命令](../01-slash-commands/) - 会话特定的快捷方式
+- [技能](../03-skills/) - 结合记忆上下文的自动化工作流
 
-### Related Claude Features
-- [Claude Web Memory](https://claude.ai) - Automatic synthesis
-- [Official Memory Docs](https://code.claude.com/docs/en/memory) - Anthropic documentation
+### 相关 Claude 功能
+- [Claude Web 记忆](https://claude.ai) - 自动综合
+- [官方记忆文档](https://code.claude.com/docs/en/memory) - Anthropic 官方文档
 
 ---
-**Last Updated**: April 24, 2026
-**Claude Code Version**: 2.1.119
-**Sources**:
-- https://code.claude.com/docs/en/memory
-- https://code.claude.com/docs/en/settings
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.117
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.119
-**Compatible Models**: Claude Sonnet 4.6, Claude Opus 4.7, Claude Haiku 4.5

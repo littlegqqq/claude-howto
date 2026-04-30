@@ -1,6 +1,6 @@
-# Quick Start - Brand Assets
+# 快速入门 - 品牌资产
 
-## Copy Assets to Your Project
+## 将资产复制到你的项目
 
 ```bash
 # Copy all resources to your web project
@@ -10,7 +10,7 @@ cp -r resources/ /path/to/your/website/
 cp resources/favicons/* /path/to/your/website/public/
 ```
 
-## Add to HTML (Copy & Paste)
+## 添加到 HTML（复制粘贴即可）
 
 ```html
 <!-- Favicons -->
@@ -21,7 +21,7 @@ cp resources/favicons/* /path/to/your/website/public/
 <meta name="theme-color" content="#000000">
 ```
 
-## Use in Markdown/Documentation
+## 在 Markdown/文档中使用
 
 ```markdown
 # Claude How To
@@ -31,18 +31,18 @@ cp resources/favicons/* /path/to/your/website/public/
 ![Icon](resources/icons/claude-howto-icon.svg)
 ```
 
-## Recommended Sizes
+## 推荐尺寸
 
-| Purpose | Size | File |
-|---------|------|------|
-| Website header | 520×120 | `logos/claude-howto-logo.svg` |
-| App icon | 256×256 | `icons/claude-howto-icon.svg` |
-| Browser tab | 32×32 | `favicons/favicon-32.svg` |
-| Mobile home screen | 128×128 | `favicons/favicon-128.svg` |
-| Desktop app | 256×256 | `favicons/favicon-256.svg` |
-| Small avatar | 64×64 | `favicons/favicon-64.svg` |
+| 用途 | 尺寸 | 文件 |
+|------|------|------|
+| 网站头部 | 520×120 | `logos/claude-howto-logo.svg` |
+| 应用图标 | 256×256 | `icons/claude-howto-icon.svg` |
+| 浏览器标签页 | 32×32 | `favicons/favicon-32.svg` |
+| 手机主屏幕 | 128×128 | `favicons/favicon-128.svg` |
+| 桌面应用 | 256×256 | `favicons/favicon-256.svg` |
+| 小头像 | 64×64 | `favicons/favicon-64.svg` |
 
-## Color Values
+## 颜色值
 
 ```css
 /* Use these in your CSS */
@@ -53,37 +53,37 @@ cp resources/favicons/* /path/to/your/website/public/
 --color-bg-dark: #0A0A0A;
 ```
 
-## Icon Design Meaning
+## 图标设计含义
 
-**Compass with Code Bracket**:
-- Compass ring = Navigation, structured learning path
-- Green north needle = Direction, progress, guidance
-- Black south needle = Grounding, solid foundation
-- `>` bracket = Terminal prompt, code, CLI context
-- Tick marks = Precision, structured steps
+**指南针与代码括号**：
+- 指南针环 = 导航，结构化学习路径
+- 绿色北针 = 方向，进步，引导
+- 黑色南针 = 根基，坚实基础
+- `>` 括号 = 终端提示符，代码，CLI 上下文
+- 刻度线 = 精确，结构化步骤
 
-This symbolizes "finding your way through code with clear guidance."
+这象征着"在清晰的引导下找到代码之路"。
 
-## What to Use Where
+## 各场景推荐用法
 
-### Website
-- **Header**: Logo (`logos/claude-howto-logo.svg`)
-- **Favicon**: 32px (`favicons/favicon-32.svg`)
-- **Social preview**: Icon (`icons/claude-howto-icon.svg`)
+### 网站
+- **头部**：Logo (`logos/claude-howto-logo.svg`)
+- **Favicon**：32px (`favicons/favicon-32.svg`)
+- **社交预览**：图标 (`icons/claude-howto-icon.svg`)
 
 ### GitHub
-- **README badge**: Icon (`icons/claude-howto-icon.svg`) at 64-128px
-- **Repository avatar**: Icon (`icons/claude-howto-icon.svg`)
+- **README 徽章**：图标 (`icons/claude-howto-icon.svg`)，64-128px
+- **仓库头像**：图标 (`icons/claude-howto-icon.svg`)
 
-### Social Media
-- **Profile picture**: Icon (`icons/claude-howto-icon.svg`)
-- **Banner**: Logo (`logos/claude-howto-logo.svg`)
-- **Thumbnail**: Icon at 256×256px
+### 社交媒体
+- **头像**：图标 (`icons/claude-howto-icon.svg`)
+- **横幅**：Logo (`logos/claude-howto-logo.svg`)
+- **缩略图**：图标 256×256px
 
-### Documentation
-- **Chapter headers**: Logo or icon (scaled to fit)
-- **Navigation icons**: Favicon (32-64px)
+### 文档
+- **章节头部**：Logo 或图标（缩放适配）
+- **导航图标**：Favicon (32-64px)
 
 ---
 
-See [README.md](README.md) for complete documentation.
+完整文档请参阅 [README.md](README.md)。

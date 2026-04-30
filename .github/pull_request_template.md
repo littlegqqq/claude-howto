@@ -1,57 +1,57 @@
-## Description
-Brief summary of what this PR does.
+## 描述
+简要说明此 PR 的内容。
 
-## Type of Change
-- [ ] New example or template
-- [ ] Documentation improvement
-- [ ] Bug fix
-- [ ] Feature guide
-- [ ] Other (please describe)
+## 变更类型
+- [ ] 新增示例或模板
+- [ ] 文档改进
+- [ ] Bug 修复
+- [ ] 功能指南
+- [ ] 其他（请描述）
 
-## Related Issues
-Closes #(issue number)
+## 相关 Issue
+关闭 #(issue 编号)
 
-## Changes Made
-- Change 1
-- Change 2
-- Change 3
+## 变更内容
+- 变更 1
+- 变更 2
+- 变更 3
 
-## What to Review
-What should reviewers focus on?
+## 审查重点
+审查者应关注哪些方面？
 
-## Files Changed
+## 变更的文件
 - `path/to/file1.md`
 - `path/to/file2.md`
 
-## Testing
-How have you tested this?
-- [ ] Tested locally with Claude Code
-- [ ] Verified examples work
-- [ ] Checked links and references
-- [ ] Reviewed for typos and clarity
+## 测试
+您是如何测试的？
+- [ ] 在本地使用 Claude Code 测试
+- [ ] 验证示例可正常运行
+- [ ] 检查了链接和引用
+- [ ] 检查了拼写和表述清晰度
 
-## Checklist
-- [ ] Follows project structure and conventions
-- [ ] Includes clear documentation/examples
-- [ ] Code/examples are copy-paste ready
-- [ ] All links are verified and working
-- [ ] No sensitive information included (keys, tokens, credentials)
-- [ ] Updated relevant README files
-- [ ] Commit message follows conventional commit format
-- [ ] No large files (>1MB) added
+## 检查清单
+- [ ] 遵循项目结构和规范
+- [ ] 包含清晰的文档/示例
+- [ ] 代码/示例可直接复制使用
+- [ ] 所有链接均已验证且可正常访问
+- [ ] 不包含敏感信息（密钥、令牌、凭证）
+- [ ] 更新了相关的 README 文件
+- [ ] 提交信息遵循约定式提交格式
+- [ ] 未添加大文件（>1MB）
 
-## Screenshots or Examples
-If applicable, show what this adds:
+## 截图或示例
+如适用，展示此 PR 添加的内容：
 ```
-[Example code or before/after comparison]
+[示例代码或前后对比]
 ```
 
-## Breaking Changes
-Does this change any existing content or behavior?
-- [ ] No breaking changes
-- [ ] Yes, and it's documented below
+## 破坏性变更
+此变更是否修改了现有内容或行为？
+- [ ] 无破坏性变更
+- [ ] 是，详情见下方说明
 
-If yes, please describe:
+如果是，请描述：
 
-## Additional Notes
-Any other information for reviewers?
+## 附加说明
+给审查者的其他信息？

@@ -3,310 +3,310 @@
   <img alt="Claude How To" src="resources/logos/claude-howto-logo.svg">
 </picture>
 
-# Claude Code Feature Catalog
+# Claude Code 功能目录
 
-> Quick reference guide to all Claude Code features: commands, agents, skills, plugins, and hooks.
+> Claude Code 所有功能的快速参考指南：命令、智能体、技能、插件和钩子。
 
-**Navigation**: [Commands](#slash-commands) | [Permission Modes](#permission-modes) | [Subagents](#subagents) | [Skills](#skills) | [Plugins](#plugins) | [MCP Servers](#mcp-servers) | [Hooks](#hooks) | [Memory](#memory-files) | [New Features](#new-features-april-2026)
-
----
-
-## Summary
-
-| Feature | Built-in | Examples | Total | Reference |
-|---------|----------|----------|-------|-----------|
-| **Slash Commands** | 60+ | 8 | 68+ | [01-slash-commands/](01-slash-commands/) |
-| **Subagents** | 6 | 11 | 17 | [04-subagents/](04-subagents/) |
-| **Skills** | 5 bundled | 4 | 9 | [03-skills/](03-skills/) |
-| **Plugins** | - | 3 | 3 | [07-plugins/](07-plugins/) |
-| **MCP Servers** | 1 | 8 | 9 | [05-mcp/](05-mcp/) |
-| **Hooks** | 28 events | 8 | 8 | [06-hooks/](06-hooks/) |
-| **Memory** | 7 types | 3 | 3 | [02-memory/](02-memory/) |
-| **Total** | **99** | **45** | **119** | |
+**导航**：[命令](#斜杠命令) | [权限模式](#权限模式) | [子智能体](#子智能体) | [技能](#技能) | [插件](#插件) | [MCP 服务器](#mcp-服务器) | [钩子](#钩子) | [记忆文件](#记忆文件) | [新功能](#新功能2026-年-4-月)
 
 ---
 
-## Slash Commands
+## 总览
 
-Commands are user-invoked shortcuts that execute specific actions.
+| 功能 | 内置 | 示例 | 合计 | 参考 |
+|------|------|------|------|------|
+| **斜杠命令** | 60+ | 8 | 68+ | [01-slash-commands/](01-slash-commands/) |
+| **子智能体** | 6 | 11 | 17 | [04-subagents/](04-subagents/) |
+| **技能** | 5 个内置 | 4 | 9 | [03-skills/](03-skills/) |
+| **插件** | - | 3 | 3 | [07-plugins/](07-plugins/) |
+| **MCP 服务器** | 1 | 8 | 9 | [05-mcp/](05-mcp/) |
+| **钩子** | 28 个事件 | 8 | 8 | [06-hooks/](06-hooks/) |
+| **记忆** | 7 种类型 | 3 | 3 | [02-memory/](02-memory/) |
+| **合计** | **99** | **45** | **119** | |
 
-### Built-in Commands
+---
 
-| Command | Description | When to Use |
-|---------|-------------|-------------|
-| `/help` | Show help information | Get started, learn commands |
-| `/btw` | Ephemeral side question — doesn't pollute main context | Quick tangent questions |
-| `/chrome` | Configure Chrome integration | Browser automation |
-| `/clear` | Clear conversation history | Start fresh, reduce context |
-| `/diff` | Interactive diff viewer | Review changes |
-| `/config` | View/edit configuration | Customize behavior |
-| `/status` | Show session status | Check current state |
-| `/agents` | List available agents | See delegation options |
-| `/skills` | List available skills | See auto-invoke capabilities |
-| `/hooks` | List configured hooks | Debug automation |
-| `/insights` | Analyze session patterns | Session optimization |
-| `/install-slack-app` | Install Claude Slack app | Slack integration |
-| `/keybindings` | Customize keyboard shortcuts | Key customization |
-| `/mcp` | List MCP servers | Check external integrations |
-| `/memory` | View loaded memory files | Debug context loading |
-| `/mobile` | Generate mobile QR code | Mobile access |
-| `/passes` | View usage passes | Subscription info |
-| `/plugin` | Manage plugins | Install/remove extensions |
-| `/plan` | Enter planning mode | Complex implementations |
-| `/proactive` | Alias for `/loop` (v2.1.105) | Same as `/loop` |
-| `/recap` | Show session recap when returning to a session | After being away, get context on what was done |
-| `/rewind` | Rewind to checkpoint | Undo changes, explore alternatives |
-| `/checkpoint` | Manage checkpoints | Save/restore states |
-| `/cost` | Shortcut alias that opens the cost tab of `/usage` (v2.1.118+) | Monitor spending |
-| `/context` | Show context window usage | Manage conversation length |
-| `/export` | Export conversation | Save for reference |
-| `/extra-usage` | Configure extra usage limits | Rate limit management |
-| `/feedback` | Submit feedback or bug report | Report issues |
-| `/login` | Authenticate with Anthropic | Access features |
-| `/logout` | Sign out | Switch accounts |
-| `/sandbox` | Toggle sandbox mode | Safe command execution |
-| `/doctor` | Run diagnostics | Troubleshoot issues |
-| `/reload-plugins` | Reload installed plugins | Plugin management |
-| `/release-notes` | Show release notes | Check new features |
-| `/remote-control` | Enable remote control | Remote access |
-| `/permissions` | Manage permissions | Control access |
-| `/session` | Manage sessions | Multi-session workflows |
-| `/rename` | Rename current session | Organize sessions |
-| `/resume` | Resume previous session | Continue work |
-| `/todo` | View/manage todo list | Track tasks |
-| `/tui` | Toggle fullscreen TUI (text user interface) mode | Flicker-free rendering in fullscreen/tmux |
-| `/tasks` | View background tasks | Monitor async operations |
-| `/copy` | Copy last response to clipboard | Share output quickly |
-| `/teleport` | Transfer session to another machine | Continue work remotely |
-| `/desktop` | Open Claude Desktop app | Switch to desktop interface |
-| `/theme` | Change color theme; v2.1.118 added custom named themes via `~/.claude/themes/<name>.json` (plugins can ship a `themes/` dir) | Customize appearance |
-| `/usage` | Canonical command for usage/cost/stats — merged `/cost` and `/stats` into a single tabbed view (v2.1.118) | Monitor quota and costs |
-| `/focus` | Toggle focus view (distraction-free output display) | Reduce visual noise during long tasks |
-| `/fork` | Fork current conversation | Explore alternatives |
-| `/stats` | Shortcut alias that opens the stats tab of `/usage` (v2.1.118+) | Review session metrics |
-| `/statusline` | Configure status line | Customize status display |
-| `/stickers` | View session stickers | Fun rewards |
-| `/fast` | Toggle fast output mode | Speed up responses |
-| `/terminal-setup` | Configure terminal integration | Setup terminal features |
-| `/undo` | Alias for `/rewind` (v2.1.108) | Same as `/rewind` |
-| `/upgrade` | Check for updates | Version management |
-| `/team-onboarding` | Generate a teammate ramp-up guide from this project's Claude Code usage | Onboarding new teammates (v2.1.101) |
-| `/ultraplan` | Hand a planning task to a Claude Code web session in plan mode | Heavy planning offload (Research Preview, v2.1.91+) |
-| `/ultrareview` | Run a cloud multi-agent code review over your current changes | Deep pre-merge review across multiple agents (v2.1.112) |
-| `/less-permission-prompts` | Scan transcripts and propose a prioritized allowlist for common read-only tools | Reduce repeat permission prompts in a project (v2.1.112) |
+## 斜杠命令
 
-### Custom Commands (Examples)
+命令是用户调用的快捷方式，用于执行特定操作。
 
-| Command | Description | When to Use | Scope | Installation |
-|---------|-------------|-------------|-------|--------------|
-| `/optimize` | Analyze code for optimization | Performance improvement | Project | `cp 01-slash-commands/optimize.md .claude/commands/` |
-| `/pr` | Prepare pull request | Before submitting PRs | Project | `cp 01-slash-commands/pr.md .claude/commands/` |
-| `/generate-api-docs` | Generate API documentation | Document APIs | Project | `cp 01-slash-commands/generate-api-docs.md .claude/commands/` |
-| `/commit` | Create git commit with context | Commit changes | User | `cp 01-slash-commands/commit.md .claude/commands/` |
-| `/push-all` | Stage, commit, and push | Quick deployment | User | `cp 01-slash-commands/push-all.md .claude/commands/` |
-| `/doc-refactor` | Restructure documentation | Improve docs | Project | `cp 01-slash-commands/doc-refactor.md .claude/commands/` |
-| `/setup-ci-cd` | Setup CI/CD pipeline | New projects | Project | `cp 01-slash-commands/setup-ci-cd.md .claude/commands/` |
-| `/unit-test-expand` | Expand test coverage | Improve testing | Project | `cp 01-slash-commands/unit-test-expand.md .claude/commands/` |
+### 内置命令
 
-> **Scope**: `User` = personal workflows (`~/.claude/commands/`), `Project` = team-shared (`.claude/commands/`)
+| 命令 | 描述 | 使用场景 |
+|------|------|----------|
+| `/help` | 显示帮助信息 | 入门学习、了解命令 |
+| `/btw` | 临时性旁问——不污染主上下文 | 快速的题外问题 |
+| `/chrome` | 配置 Chrome 集成 | 浏览器自动化 |
+| `/clear` | 清除对话历史 | 重新开始、减少上下文 |
+| `/diff` | 交互式差异查看器 | 审查变更 |
+| `/config` | 查看/编辑配置 | 自定义行为 |
+| `/status` | 显示会话状态 | 检查当前状态 |
+| `/agents` | 列出可用智能体 | 查看委派选项 |
+| `/skills` | 列出可用技能 | 查看自动调用能力 |
+| `/hooks` | 列出已配置的钩子 | 调试自动化流程 |
+| `/insights` | 分析会话模式 | 优化会话 |
+| `/install-slack-app` | 安装 Claude Slack 应用 | Slack 集成 |
+| `/keybindings` | 自定义键盘快捷键 | 按键自定义 |
+| `/mcp` | 列出 MCP 服务器 | 检查外部集成 |
+| `/memory` | 查看已加载的记忆文件 | 调试上下文加载 |
+| `/mobile` | 生成手机二维码 | 移动端访问 |
+| `/passes` | 查看使用通行证 | 订阅信息 |
+| `/plugin` | 管理插件 | 安装/移除扩展 |
+| `/plan` | 进入规划模式 | 复杂实现方案 |
+| `/proactive` | `/loop` 的别名（v2.1.105） | 与 `/loop` 相同 |
+| `/recap` | 返回会话时显示会话回顾 | 离开后回来，了解之前做了什么 |
+| `/rewind` | 回退到检查点 | 撤销更改、探索替代方案 |
+| `/checkpoint` | 管理检查点 | 保存/恢复状态 |
+| `/cost` | 快捷别名，打开 `/usage` 的费用标签页（v2.1.118+） | 监控支出 |
+| `/context` | 显示上下文窗口使用情况 | 管理对话长度 |
+| `/export` | 导出对话 | 保存以供参考 |
+| `/extra-usage` | 配置额外使用限额 | 速率限制管理 |
+| `/feedback` | 提交反馈或错误报告 | 报告问题 |
+| `/login` | 使用 Anthropic 账号认证 | 访问功能 |
+| `/logout` | 登出 | 切换账号 |
+| `/sandbox` | 切换沙盒模式 | 安全执行命令 |
+| `/doctor` | 运行诊断 | 排查问题 |
+| `/reload-plugins` | 重新加载已安装的插件 | 插件管理 |
+| `/release-notes` | 显示发布说明 | 查看新功能 |
+| `/remote-control` | 启用远程控制 | 远程访问 |
+| `/permissions` | 管理权限 | 控制访问 |
+| `/session` | 管理会话 | 多会话工作流 |
+| `/rename` | 重命名当前会话 | 整理会话 |
+| `/resume` | 恢复上一个会话 | 继续工作 |
+| `/todo` | 查看/管理待办列表 | 跟踪任务 |
+| `/tui` | 切换全屏 TUI（文本用户界面）模式 | 在全屏终端或 tmux 中无闪烁渲染 |
+| `/tasks` | 查看后台任务 | 监控异步操作 |
+| `/copy` | 复制上一条响应到剪贴板 | 快速分享输出 |
+| `/teleport` | 将会话传送到另一台机器 | 远程继续工作 |
+| `/desktop` | 打开 Claude Desktop 应用 | 切换到桌面界面 |
+| `/theme` | 更改颜色主题；v2.1.118 新增通过 `~/.claude/themes/<name>.json` 自定义命名主题（插件可附带 `themes/` 目录） | 自定义外观 |
+| `/usage` | 使用量/费用/统计的规范命令——将 `/cost` 和 `/stats` 合并为单一的标签页视图（v2.1.118） | 监控配额和费用 |
+| `/focus` | 切换焦点视图（无干扰输出显示） | 长任务期间减少视觉干扰 |
+| `/fork` | 复刻当前对话 | 探索替代方案 |
+| `/stats` | 快捷别名，打开 `/usage` 的统计标签页（v2.1.118+） | 查看会话指标 |
+| `/statusline` | 配置状态栏 | 自定义状态显示 |
+| `/stickers` | 查看会话贴纸 | 趣味奖励 |
+| `/fast` | 切换快速输出模式 | 加快响应速度 |
+| `/terminal-setup` | 配置终端集成 | 设置终端功能 |
+| `/undo` | `/rewind` 的别名（v2.1.108） | 与 `/rewind` 相同 |
+| `/upgrade` | 检查更新 | 版本管理 |
+| `/team-onboarding` | 根据项目的 Claude Code 使用情况生成团队成员上手指南 | 新成员入职（v2.1.101） |
+| `/ultraplan` | 将规划任务交给 Claude Code 云端会话以规划模式运行 | 重度规划卸载（研究预览，v2.1.91+） |
+| `/ultrareview` | 对当前变更运行云端多智能体代码审查 | 合并前跨多个智能体的深度审查（v2.1.112） |
+| `/less-permission-prompts` | 扫描会话记录并为常见只读工具建议优先级白名单 | 减少项目中重复的权限提示（v2.1.112） |
 
-**Reference**: [01-slash-commands/](01-slash-commands/) | [Official Docs](https://code.claude.com/docs/en/interactive-mode)
+### 自定义命令（示例）
 
-**Quick Install (All Custom Commands)**:
+| 命令 | 描述 | 使用场景 | 作用域 | 安装方式 |
+|------|------|----------|--------|----------|
+| `/optimize` | 分析代码并进行优化 | 性能改进 | 项目 | `cp 01-slash-commands/optimize.md .claude/commands/` |
+| `/pr` | 准备拉取请求 | 提交 PR 之前 | 项目 | `cp 01-slash-commands/pr.md .claude/commands/` |
+| `/generate-api-docs` | 生成 API 文档 | 编写 API 文档 | 项目 | `cp 01-slash-commands/generate-api-docs.md .claude/commands/` |
+| `/commit` | 创建带上下文的 Git 提交 | 提交变更 | 用户 | `cp 01-slash-commands/commit.md .claude/commands/` |
+| `/push-all` | 暂存、提交并推送 | 快速部署 | 用户 | `cp 01-slash-commands/push-all.md .claude/commands/` |
+| `/doc-refactor` | 重构文档结构 | 改善文档 | 项目 | `cp 01-slash-commands/doc-refactor.md .claude/commands/` |
+| `/setup-ci-cd` | 设置 CI/CD 流水线 | 新项目 | 项目 | `cp 01-slash-commands/setup-ci-cd.md .claude/commands/` |
+| `/unit-test-expand` | 扩展测试覆盖率 | 改善测试 | 项目 | `cp 01-slash-commands/unit-test-expand.md .claude/commands/` |
+
+> **作用域**：`用户` = 个人工作流（`~/.claude/commands/`），`项目` = 团队共享（`.claude/commands/`）
+
+**参考**：[01-slash-commands/](01-slash-commands/) | [官方文档](https://code.claude.com/docs/en/interactive-mode)
+
+**快速安装（所有自定义命令）**：
 ```bash
 cp 01-slash-commands/*.md .claude/commands/
 ```
 
 ---
 
-## Permission Modes
+## 权限模式
 
-Claude Code supports 6 permission modes that control how tool use is authorized.
+Claude Code 支持 6 种权限模式，用于控制工具使用的授权方式。
 
-| Mode | Description | When to Use |
-|------|-------------|-------------|
-| `default` | Prompt for each tool call | Standard interactive use |
-| `acceptEdits` | Auto-accept file edits, prompt for others | Trusted editing workflows |
-| `plan` | Read-only tools only, no writes | Planning and exploration |
-| `auto` | Accept all tools without prompting | Fully autonomous operation (Research Preview) |
-| `bypassPermissions` | Skip all permission checks | CI/CD, headless environments |
-| `dontAsk` | Skip tools that would require permission | Non-interactive scripting |
+| 模式 | 描述 | 使用场景 |
+|------|------|----------|
+| `default` | 每次工具调用都提示确认 | 标准交互使用 |
+| `acceptEdits` | 自动接受文件编辑，其他操作需确认 | 可信的编辑工作流 |
+| `plan` | 仅限只读工具，不可写入 | 规划和探索 |
+| `auto` | 接受所有工具调用，无需提示 | 完全自主运行（研究预览） |
+| `bypassPermissions` | 跳过所有权限检查 | CI/CD、无头环境 |
+| `dontAsk` | 跳过需要权限确认的工具 | 非交互式脚本 |
 
-> **Note**: `auto` mode is a Research Preview feature (March 2026). Use `bypassPermissions` only in trusted, sandboxed environments.
+> **注意**：`auto` 模式为研究预览功能（2026 年 3 月）。`bypassPermissions` 仅应在可信的沙盒环境中使用。
 
-**Reference**: [Official Docs](https://code.claude.com/docs/en/permissions)
+**参考**：[官方文档](https://code.claude.com/docs/en/permissions)
 
 ---
 
-## Subagents
+## 子智能体
 
-Specialized AI assistants with isolated contexts for specific tasks.
+具有隔离上下文的专业化 AI 助手，用于处理特定任务。
 
-### Built-in Subagents
+### 内置子智能体
 
-| Agent | Description | Tools | Model | When to Use |
-|-------|-------------|-------|-------|-------------|
-| **general-purpose** | Multi-step tasks, research | All tools | Inherits model | Complex research, multi-file tasks |
-| **Plan** | Implementation planning | Read, Glob, Grep, Bash | Inherits model | Architecture design, planning |
-| **Explore** | Codebase exploration | Read, Glob, Grep | Haiku 4.5 | Quick searches, understanding code |
-| **Bash** | Command execution | Bash | Inherits model | Git operations, terminal tasks |
-| **statusline-setup** | Status line configuration | Bash, Read, Write | Sonnet 4.6 | Configure status line display |
-| **Claude Code Guide** | Help and documentation | Read, Glob, Grep | Haiku 4.5 | Getting help, learning features |
+| 智能体 | 描述 | 可用工具 | 模型 | 使用场景 |
+|--------|------|----------|------|----------|
+| **general-purpose** | 多步骤任务、研究 | 所有工具 | 继承模型 | 复杂研究、多文件任务 |
+| **Plan** | 实现方案规划 | Read、Glob、Grep、Bash | 继承模型 | 架构设计、方案规划 |
+| **Explore** | 代码库探索 | Read、Glob、Grep | Haiku 4.5 | 快速搜索、理解代码 |
+| **Bash** | 命令执行 | Bash | 继承模型 | Git 操作、终端任务 |
+| **statusline-setup** | 状态栏配置 | Bash、Read、Write | Sonnet 4.6 | 配置状态栏显示 |
+| **Claude Code Guide** | 帮助和文档 | Read、Glob、Grep | Haiku 4.5 | 获取帮助、学习功能 |
 
-### Subagent Configuration Fields
+### 子智能体配置字段
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `name` | string | Agent identifier |
-| `description` | string | What the agent does |
-| `model` | string | Model override (e.g., `haiku-4.5`) |
-| `tools` | array | Allowed tools list |
-| `effort` | string | Reasoning effort level (`low`, `medium`, `high`) |
-| `initialPrompt` | string | System prompt injected at agent start |
-| `disallowedTools` | array | Tools explicitly denied to this agent |
+| 字段 | 类型 | 描述 |
+|------|------|------|
+| `name` | string | 智能体标识符 |
+| `description` | string | 智能体功能描述 |
+| `model` | string | 模型覆盖（如 `haiku-4.5`） |
+| `tools` | array | 允许的工具列表 |
+| `effort` | string | 推理努力级别（`low`、`medium`、`high`） |
+| `initialPrompt` | string | 智能体启动时注入的系统提示词 |
+| `disallowedTools` | array | 明确禁止该智能体使用的工具 |
 
-### Custom Subagents (Examples)
+### 自定义子智能体（示例）
 
-| Agent | Description | When to Use | Scope | Installation |
-|-------|-------------|-------------|-------|--------------|
-| `code-reviewer` | Comprehensive code quality | Code review sessions | Project | `cp 04-subagents/code-reviewer.md .claude/agents/` |
-| `code-architect` | Feature architecture design | New feature planning | Project | `cp 04-subagents/code-architect.md .claude/agents/` |
-| `code-explorer` | Deep codebase analysis | Understanding existing features | Project | `cp 04-subagents/code-explorer.md .claude/agents/` |
-| `clean-code-reviewer` | Clean Code principles review | Maintainability review | Project | `cp 04-subagents/clean-code-reviewer.md .claude/agents/` |
-| `test-engineer` | Test strategy & coverage | Test planning | Project | `cp 04-subagents/test-engineer.md .claude/agents/` |
-| `documentation-writer` | Technical documentation | API docs, guides | Project | `cp 04-subagents/documentation-writer.md .claude/agents/` |
-| `secure-reviewer` | Security-focused review | Security audits | Project | `cp 04-subagents/secure-reviewer.md .claude/agents/` |
-| `implementation-agent` | Full feature implementation | Feature development | Project | `cp 04-subagents/implementation-agent.md .claude/agents/` |
-| `debugger` | Root cause analysis | Bug investigation | User | `cp 04-subagents/debugger.md .claude/agents/` |
-| `data-scientist` | SQL queries, data analysis | Data tasks | User | `cp 04-subagents/data-scientist.md .claude/agents/` |
-| `performance-optimizer` | Profiling & performance tuning | Bottleneck investigation | Project | `cp 04-subagents/performance-optimizer.md .claude/agents/` |
+| 智能体 | 描述 | 使用场景 | 作用域 | 安装方式 |
+|--------|------|----------|--------|----------|
+| `code-reviewer` | 全面的代码质量审查 | 代码审查会话 | 项目 | `cp 04-subagents/code-reviewer.md .claude/agents/` |
+| `code-architect` | 功能架构设计 | 新功能规划 | 项目 | `cp 04-subagents/code-architect.md .claude/agents/` |
+| `code-explorer` | 深度代码库分析 | 理解现有功能 | 项目 | `cp 04-subagents/code-explorer.md .claude/agents/` |
+| `clean-code-reviewer` | 整洁代码原则审查 | 可维护性审查 | 项目 | `cp 04-subagents/clean-code-reviewer.md .claude/agents/` |
+| `test-engineer` | 测试策略与覆盖率 | 测试规划 | 项目 | `cp 04-subagents/test-engineer.md .claude/agents/` |
+| `documentation-writer` | 技术文档编写 | API 文档、指南 | 项目 | `cp 04-subagents/documentation-writer.md .claude/agents/` |
+| `secure-reviewer` | 安全导向审查 | 安全审计 | 项目 | `cp 04-subagents/secure-reviewer.md .claude/agents/` |
+| `implementation-agent` | 完整功能实现 | 功能开发 | 项目 | `cp 04-subagents/implementation-agent.md .claude/agents/` |
+| `debugger` | 根因分析 | 缺陷调查 | 用户 | `cp 04-subagents/debugger.md .claude/agents/` |
+| `data-scientist` | SQL 查询、数据分析 | 数据任务 | 用户 | `cp 04-subagents/data-scientist.md .claude/agents/` |
+| `performance-optimizer` | 性能分析与调优 | 瓶颈调查 | 项目 | `cp 04-subagents/performance-optimizer.md .claude/agents/` |
 
-> **Scope**: `User` = personal (`~/.claude/agents/`), `Project` = team-shared (`.claude/agents/`)
+> **作用域**：`用户` = 个人（`~/.claude/agents/`），`项目` = 团队共享（`.claude/agents/`）
 
-**Reference**: [04-subagents/](04-subagents/) | [Official Docs](https://code.claude.com/docs/en/sub-agents)
+**参考**：[04-subagents/](04-subagents/) | [官方文档](https://code.claude.com/docs/en/sub-agents)
 
-**Quick Install (All Custom Agents)**:
+**快速安装（所有自定义智能体）**：
 ```bash
 cp 04-subagents/*.md .claude/agents/
 ```
 
 ---
 
-## Skills
+## 技能
 
-Auto-invoked capabilities with instructions, scripts, and templates.
+具有指令、脚本和模板的自动调用能力。
 
-### Example Skills
+### 示例技能
 
-| Skill | Description | When Auto-Invoked | Scope | Installation |
-|-------|-------------|-------------------|-------|--------------|
-| `code-review` | Comprehensive code review | "Review this code", "Check quality" | Project | `cp -r 03-skills/code-review .claude/skills/` |
-| `brand-voice` | Brand consistency checker | Writing marketing copy | Project | `cp -r 03-skills/brand-voice .claude/skills/` |
-| `doc-generator` | API documentation generator | "Generate docs", "Document API" | Project | `cp -r 03-skills/doc-generator .claude/skills/` |
-| `refactor` | Systematic code refactoring (Martin Fowler) | "Refactor this", "Clean up code" | User | `cp -r 03-skills/refactor ~/.claude/skills/` |
+| 技能 | 描述 | 自动调用时机 | 作用域 | 安装方式 |
+|------|------|------------|--------|----------|
+| `code-review` | 全面的代码审查 | "审查这段代码"、"检查质量" | 项目 | `cp -r 03-skills/code-review .claude/skills/` |
+| `brand-voice` | 品牌一致性检查 | 撰写营销文案时 | 项目 | `cp -r 03-skills/brand-voice .claude/skills/` |
+| `doc-generator` | API 文档生成器 | "生成文档"、"编写 API 文档" | 项目 | `cp -r 03-skills/doc-generator .claude/skills/` |
+| `refactor` | 系统化代码重构（Martin Fowler 方法） | "重构这个"、"整理代码" | 用户 | `cp -r 03-skills/refactor ~/.claude/skills/` |
 
-> **Scope**: `User` = personal (`~/.claude/skills/`), `Project` = team-shared (`.claude/skills/`)
+> **作用域**：`用户` = 个人（`~/.claude/skills/`），`项目` = 团队共享（`.claude/skills/`）
 
-### Skill Structure
+### 技能结构
 
 ```
 ~/.claude/skills/skill-name/
-├── SKILL.md          # Skill definition & instructions
-├── scripts/          # Helper scripts
-└── templates/        # Output templates
+├── SKILL.md          # 技能定义与指令
+├── scripts/          # 辅助脚本
+└── templates/        # 输出模板
 ```
 
-### Skill Frontmatter Fields
+### 技能前言字段
 
-Skills support YAML frontmatter in `SKILL.md` for configuration:
+技能在 `SKILL.md` 中支持 YAML 前言配置：
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `name` | string | Skill display name |
-| `description` | string | What the skill does |
-| `autoInvoke` | array | Trigger phrases for auto-invocation |
-| `effort` | string | Reasoning effort level (`low`, `medium`, `high`) |
-| `shell` | string | Shell to use for scripts (`bash`, `zsh`, `sh`) |
+| 字段 | 类型 | 描述 |
+|------|------|------|
+| `name` | string | 技能显示名称 |
+| `description` | string | 技能功能描述 |
+| `autoInvoke` | array | 自动调用的触发短语 |
+| `effort` | string | 推理努力级别（`low`、`medium`、`high`） |
+| `shell` | string | 脚本使用的 Shell（`bash`、`zsh`、`sh`） |
 
-**Reference**: [03-skills/](03-skills/) | [Official Docs](https://code.claude.com/docs/en/skills)
+**参考**：[03-skills/](03-skills/) | [官方文档](https://code.claude.com/docs/en/skills)
 
-**Quick Install (All Skills)**:
+**快速安装（所有技能）**：
 ```bash
 cp -r 03-skills/* ~/.claude/skills/
 ```
 
-### Bundled Skills
+### 内置技能
 
-| Skill | Description | When Auto-Invoked |
-|-------|-------------|-------------------|
-| `/simplify` | Review code for quality | After writing code |
-| `/batch` | Run prompts on multiple files | Batch operations |
-| `/debug` | Debug failing tests/errors | Debugging sessions |
-| `/loop` | Run prompts on interval | Recurring tasks |
-| `/claude-api` | Build apps with Claude API | API development |
+| 技能 | 描述 | 自动调用时机 |
+|------|------|------------|
+| `/simplify` | 审查代码质量 | 编写代码后 |
+| `/batch` | 对多个文件运行提示词 | 批量操作 |
+| `/debug` | 调试失败的测试/错误 | 调试会话 |
+| `/loop` | 按间隔运行提示词 | 循环任务 |
+| `/claude-api` | 使用 Claude API 构建应用 | API 开发 |
 
 ---
 
-## Plugins
+## 插件
 
-Bundled collections of commands, agents, MCP servers, and hooks.
+命令、智能体、MCP 服务器和钩子的捆绑集合。
 
-### Example Plugins
+### 示例插件
 
-| Plugin | Description | Components | When to Use | Scope | Installation |
-|--------|-------------|------------|-------------|-------|--------------|
-| `pr-review` | PR review workflow | 3 commands, 3 agents, GitHub MCP | Code reviews | Project | `/plugin install pr-review` |
-| `devops-automation` | Deployment & monitoring | 4 commands, 3 agents, K8s MCP | DevOps tasks | Project | `/plugin install devops-automation` |
-| `documentation` | Doc generation suite | 4 commands, 3 agents, templates | Documentation | Project | `/plugin install documentation` |
+| 插件 | 描述 | 组件 | 使用场景 | 作用域 | 安装方式 |
+|------|------|------|----------|--------|----------|
+| `pr-review` | PR 审查工作流 | 3 个命令、3 个智能体、GitHub MCP | 代码审查 | 项目 | `/plugin install pr-review` |
+| `devops-automation` | 部署与监控 | 4 个命令、3 个智能体、K8s MCP | DevOps 任务 | 项目 | `/plugin install devops-automation` |
+| `documentation` | 文档生成套件 | 4 个命令、3 个智能体、模板 | 文档编写 | 项目 | `/plugin install documentation` |
 
-> **Scope**: `Project` = team-shared, `User` = personal workflows
+> **作用域**：`项目` = 团队共享，`用户` = 个人工作流
 
-### Plugin Structure
+### 插件结构
 
 ```
 .claude-plugin/
-├── plugin.json       # Manifest file
-├── commands/         # Slash commands
-├── agents/           # Subagents
-├── skills/           # Skills
-├── mcp/              # MCP configurations
-├── hooks/            # Hook scripts
-└── scripts/          # Utility scripts
+├── plugin.json       # 清单文件
+├── commands/         # 斜杠命令
+├── agents/           # 子智能体
+├── skills/           # 技能
+├── mcp/              # MCP 配置
+├── hooks/            # 钩子脚本
+└── scripts/          # 工具脚本
 ```
 
-**Reference**: [07-plugins/](07-plugins/) | [Official Docs](https://code.claude.com/docs/en/plugins)
+**参考**：[07-plugins/](07-plugins/) | [官方文档](https://code.claude.com/docs/en/plugins)
 
-**Plugin Management Commands**:
+**插件管理命令**：
 ```bash
-/plugin list              # List installed plugins
-/plugin install <name>    # Install plugin
-/plugin remove <name>     # Remove plugin
-/plugin update <name>     # Update plugin
+/plugin list              # 列出已安装的插件
+/plugin install <name>    # 安装插件
+/plugin remove <name>     # 移除插件
+/plugin update <name>     # 更新插件
 ```
 
 ---
 
-## MCP Servers
+## MCP 服务器
 
-Model Context Protocol servers for external tool and API access.
+Model Context Protocol 服务器，用于外部工具和 API 访问。
 
-### Common MCP Servers
+### 常用 MCP 服务器
 
-| Server | Description | When to Use | Scope | Installation |
-|--------|-------------|-------------|-------|--------------|
-| **GitHub** | PR management, issues, code | GitHub workflows | Project | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` |
-| **Database** | SQL queries, data access | Database operations | Project | `claude mcp add db -- npx -y @modelcontextprotocol/server-postgres` |
-| **Filesystem** | Advanced file operations | Complex file tasks | User | `claude mcp add fs -- npx -y @modelcontextprotocol/server-filesystem` |
-| **Slack** | Team communication | Notifications, updates | Project | Configure in settings |
-| **Google Docs** | Document access | Doc editing, review | Project | Configure in settings |
-| **Asana** | Project management | Task tracking | Project | Configure in settings |
-| **Stripe** | Payment data | Financial analysis | Project | Configure in settings |
-| **Memory** | Persistent memory | Cross-session recall | User | Configure in settings |
-| **Context7** | Library documentation | Up-to-date docs lookup | Built-in | Built-in |
+| 服务器 | 描述 | 使用场景 | 作用域 | 安装方式 |
+|--------|------|----------|--------|----------|
+| **GitHub** | PR 管理、议题、代码 | GitHub 工作流 | 项目 | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` |
+| **Database** | SQL 查询、数据访问 | 数据库操作 | 项目 | `claude mcp add db -- npx -y @modelcontextprotocol/server-postgres` |
+| **Filesystem** | 高级文件操作 | 复杂文件任务 | 用户 | `claude mcp add fs -- npx -y @modelcontextprotocol/server-filesystem` |
+| **Slack** | 团队通信 | 通知、更新 | 项目 | 在设置中配置 |
+| **Google Docs** | 文档访问 | 文档编辑、审阅 | 项目 | 在设置中配置 |
+| **Asana** | 项目管理 | 任务跟踪 | 项目 | 在设置中配置 |
+| **Stripe** | 支付数据 | 财务分析 | 项目 | 在设置中配置 |
+| **Memory** | 持久化记忆 | 跨会话回忆 | 用户 | 在设置中配置 |
+| **Context7** | 库文档 | 最新文档查阅 | 内置 | 内置 |
 
-> **Scope**: `Project` = team (`.mcp.json`), `User` = personal (`~/.claude.json`), `Built-in` = pre-installed
+> **作用域**：`项目` = 团队（`.mcp.json`），`用户` = 个人（`~/.claude.json`），`内置` = 预装
 
-### MCP Configuration Example
+### MCP 配置示例
 
 ```json
 {
@@ -322,65 +322,65 @@ Model Context Protocol servers for external tool and API access.
 }
 ```
 
-**Reference**: [05-mcp/](05-mcp/) | [MCP Protocol Docs](https://modelcontextprotocol.io)
+**参考**：[05-mcp/](05-mcp/) | [MCP 协议文档](https://modelcontextprotocol.io)
 
-**Quick Install (GitHub MCP)**:
+**快速安装（GitHub MCP）**：
 ```bash
 export GITHUB_TOKEN="your_token" && claude mcp add github -- npx -y @modelcontextprotocol/server-github
 ```
 
 ---
 
-## Hooks
+## 钩子
 
-Event-driven automation that executes shell commands on Claude Code events.
+基于事件驱动的自动化，在 Claude Code 事件发生时执行 Shell 命令。
 
-### Hook Events
+### 钩子事件
 
-| Event | Description | When Triggered | Use Cases |
-|-------|-------------|----------------|-----------|
-| `SessionStart` | Session begins/resumes | Session initialization | Setup tasks |
-| `InstructionsLoaded` | Instructions loaded | CLAUDE.md or rules file loaded | Custom instruction handling |
-| `UserPromptSubmit` | Before prompt processing | User sends message | Input validation |
-| `PreToolUse` | Before tool execution | Before any tool runs | Validation, logging |
-| `PermissionRequest` | Permission dialog shown | Before sensitive actions | Custom approval flows |
-| `PostToolUse` | After tool succeeds | After any tool completes | Formatting, notifications |
-| `PostToolUseFailure` | Tool execution fails | After tool error | Error handling, logging |
-| `Notification` | Notification sent | Claude sends notification | External alerts |
-| `SubagentStart` | Subagent spawned | Subagent task starts | Initialize subagent context |
-| `SubagentStop` | Subagent finishes | Subagent task complete | Chain actions |
-| `Stop` | Claude finishes responding | Response complete | Cleanup, reporting |
-| `StopFailure` | API error ends turn | API error occurs | Error recovery, logging |
-| `TeammateIdle` | Teammate agent idle | Agent team coordination | Distribute work |
-| `TaskCompleted` | Task marked complete | Task done | Post-task processing |
-| `TaskCreated` | Task created via TaskCreate | New task created | Task tracking, logging |
-| `ConfigChange` | Configuration updated | Settings modified | React to config changes |
-| `CwdChanged` | Working directory changes | Directory changed | Directory-specific setup |
-| `FileChanged` | Watched file changes | File modified | File monitoring, rebuild |
-| `PreCompact` | Before compact operation | Context compression | State preservation |
-| `PostCompact` | After compaction completes | Compaction done | Post-compact actions |
-| `WorktreeCreate` | Worktree being created | Git worktree created | Setup worktree environment |
-| `WorktreeRemove` | Worktree being removed | Git worktree removed | Cleanup worktree resources |
-| `Elicitation` | MCP server requests input | MCP elicitation | Input validation |
-| `ElicitationResult` | User responds to elicitation | User responds | Response processing |
-| `SessionEnd` | Session terminates | Session termination | Cleanup, save state |
+| 事件 | 描述 | 触发时机 | 使用场景 |
+|------|------|----------|----------|
+| `SessionStart` | 会话开始/恢复 | 会话初始化 | 初始化任务 |
+| `InstructionsLoaded` | 指令加载完成 | CLAUDE.md 或规则文件加载时 | 自定义指令处理 |
+| `UserPromptSubmit` | 提示词处理之前 | 用户发送消息 | 输入验证 |
+| `PreToolUse` | 工具执行之前 | 任何工具运行前 | 验证、日志记录 |
+| `PermissionRequest` | 权限对话框显示 | 敏感操作前 | 自定义审批流程 |
+| `PostToolUse` | 工具执行成功后 | 任何工具完成后 | 格式化、通知 |
+| `PostToolUseFailure` | 工具执行失败 | 工具出错后 | 错误处理、日志记录 |
+| `Notification` | 发送通知 | Claude 发送通知时 | 外部告警 |
+| `SubagentStart` | 子智能体被派生 | 子智能体任务开始 | 初始化子智能体上下文 |
+| `SubagentStop` | 子智能体完成 | 子智能体任务结束 | 链式操作 |
+| `Stop` | Claude 完成响应 | 响应结束 | 清理、报告 |
+| `StopFailure` | API 错误结束回合 | API 错误发生时 | 错误恢复、日志记录 |
+| `TeammateIdle` | 队友智能体空闲 | 智能体团队协调 | 分配工作 |
+| `TaskCompleted` | 任务标记完成 | 任务完成时 | 任务后处理 |
+| `TaskCreated` | 通过 TaskCreate 创建任务 | 新任务创建时 | 任务跟踪、日志记录 |
+| `ConfigChange` | 配置更新 | 设置被修改时 | 响应配置变更 |
+| `CwdChanged` | 工作目录变更 | 目录改变时 | 目录特定的设置 |
+| `FileChanged` | 监控的文件变更 | 文件被修改时 | 文件监控、重新构建 |
+| `PreCompact` | 压缩操作之前 | 上下文压缩时 | 状态保存 |
+| `PostCompact` | 压缩完成之后 | 压缩结束时 | 压缩后操作 |
+| `WorktreeCreate` | 工作树正在创建 | Git 工作树创建时 | 设置工作树环境 |
+| `WorktreeRemove` | 工作树正在移除 | Git 工作树移除时 | 清理工作树资源 |
+| `Elicitation` | MCP 服务器请求输入 | MCP 请求交互时 | 输入验证 |
+| `ElicitationResult` | 用户响应交互请求 | 用户响应时 | 响应处理 |
+| `SessionEnd` | 会话终止 | 会话结束时 | 清理、保存状态 |
 
-### Example Hooks
+### 示例钩子
 
-| Hook | Description | Event | Scope | Installation |
-|------|-------------|-------|-------|--------------|
-| `validate-bash.py` | Command validation | PreToolUse:Bash | Project | `cp 06-hooks/validate-bash.py .claude/hooks/` |
-| `security-scan.py` | Security scanning | PostToolUse:Write | Project | `cp 06-hooks/security-scan.py .claude/hooks/` |
-| `format-code.sh` | Auto-formatting | PostToolUse:Write | User | `cp 06-hooks/format-code.sh ~/.claude/hooks/` |
-| `validate-prompt.py` | Prompt validation | UserPromptSubmit | Project | `cp 06-hooks/validate-prompt.py .claude/hooks/` |
-| `context-tracker.py` | Token usage tracking | Stop | User | `cp 06-hooks/context-tracker.py ~/.claude/hooks/` |
-| `pre-commit.sh` | Pre-commit validation | PreToolUse:Bash | Project | `cp 06-hooks/pre-commit.sh .claude/hooks/` |
-| `log-bash.sh` | Command logging | PostToolUse:Bash | User | `cp 06-hooks/log-bash.sh ~/.claude/hooks/` |
-| `dependency-check.sh` | Vulnerability scan on manifest changes | PostToolUse:Write | Project | `cp 06-hooks/dependency-check.sh .claude/hooks/` |
+| 钩子 | 描述 | 事件 | 作用域 | 安装方式 |
+|------|------|------|--------|----------|
+| `validate-bash.py` | 命令验证 | PreToolUse:Bash | 项目 | `cp 06-hooks/validate-bash.py .claude/hooks/` |
+| `security-scan.py` | 安全扫描 | PostToolUse:Write | 项目 | `cp 06-hooks/security-scan.py .claude/hooks/` |
+| `format-code.sh` | 自动格式化 | PostToolUse:Write | 用户 | `cp 06-hooks/format-code.sh ~/.claude/hooks/` |
+| `validate-prompt.py` | 提示词验证 | UserPromptSubmit | 项目 | `cp 06-hooks/validate-prompt.py .claude/hooks/` |
+| `context-tracker.py` | Token 使用量跟踪 | Stop | 用户 | `cp 06-hooks/context-tracker.py ~/.claude/hooks/` |
+| `pre-commit.sh` | 预提交验证 | PreToolUse:Bash | 项目 | `cp 06-hooks/pre-commit.sh .claude/hooks/` |
+| `log-bash.sh` | 命令日志记录 | PostToolUse:Bash | 用户 | `cp 06-hooks/log-bash.sh ~/.claude/hooks/` |
+| `dependency-check.sh` | 清单文件变更时的漏洞扫描 | PostToolUse:Write | 项目 | `cp 06-hooks/dependency-check.sh .claude/hooks/` |
 
-> **Scope**: `Project` = team (`.claude/settings.json`), `User` = personal (`~/.claude/settings.json`)
+> **作用域**：`项目` = 团队（`.claude/settings.json`），`用户` = 个人（`~/.claude/settings.json`）
 
-### Hook Configuration
+### 钩子配置
 
 ```json
 {
@@ -401,36 +401,36 @@ Event-driven automation that executes shell commands on Claude Code events.
 }
 ```
 
-**Reference**: [06-hooks/](06-hooks/) | [Official Docs](https://code.claude.com/docs/en/hooks)
+**参考**：[06-hooks/](06-hooks/) | [官方文档](https://code.claude.com/docs/en/hooks)
 
-**Quick Install (All Hooks)**:
+**快速安装（所有钩子）**：
 ```bash
 mkdir -p ~/.claude/hooks && cp 06-hooks/*.sh ~/.claude/hooks/ && chmod +x ~/.claude/hooks/*.sh
 ```
 
 ---
 
-## Memory Files
+## 记忆文件
 
-Persistent context loaded automatically across sessions.
+跨会话自动加载的持久化上下文。
 
-### Memory Types
+### 记忆类型
 
-| Type | Location | Scope | When to Use |
-|------|----------|-------|-------------|
-| **Managed Policy** | Org-managed policies | Organization | Enforce org-wide standards |
-| **Project** | `./CLAUDE.md` | Project (team) | Team standards, project context |
-| **Project Rules** | `.claude/rules/` | Project (team) | Modular project rules |
-| **User** | `~/.claude/CLAUDE.md` | User (personal) | Personal preferences |
-| **User Rules** | `~/.claude/rules/` | User (personal) | Modular personal rules |
-| **Local** | `./CLAUDE.local.md` | Local (git-ignored) | Machine-specific overrides (not in official docs as of March 2026; may be legacy) |
-| **Auto Memory** | Automatic | Session | Auto-captured insights and corrections |
+| 类型 | 位置 | 作用域 | 使用场景 |
+|------|------|--------|----------|
+| **托管策略** | 组织托管策略 | 组织 | 强制执行组织范围的标准 |
+| **项目** | `./CLAUDE.md` | 项目（团队） | 团队标准、项目上下文 |
+| **项目规则** | `.claude/rules/` | 项目（团队） | 模块化项目规则 |
+| **用户** | `~/.claude/CLAUDE.md` | 用户（个人） | 个人偏好 |
+| **用户规则** | `~/.claude/rules/` | 用户（个人） | 模块化个人规则 |
+| **本地** | `./CLAUDE.local.md` | 本地（git 忽略） | 特定机器覆盖（截至 2026 年 3 月官方文档未列出；可能为遗留功能） |
+| **自动记忆** | 自动 | 会话 | 自动捕获的洞察和修正 |
 
-> **Scope**: `Organization` = managed by admins, `Project` = shared with team via git, `User` = personal preferences, `Local` = not committed, `Session` = auto-managed
+> **作用域**：`组织` = 管理员管理，`项目` = 通过 git 与团队共享，`用户` = 个人偏好，`本地` = 不提交，`会话` = 自动管理
 
-**Reference**: [02-memory/](02-memory/) | [Official Docs](https://code.claude.com/docs/en/memory)
+**参考**：[02-memory/](02-memory/) | [官方文档](https://code.claude.com/docs/en/memory)
 
-**Quick Install**:
+**快速安装**：
 ```bash
 cp 02-memory/project-CLAUDE.md ./CLAUDE.md
 cp 02-memory/personal-CLAUDE.md ~/.claude/CLAUDE.md
@@ -438,79 +438,79 @@ cp 02-memory/personal-CLAUDE.md ~/.claude/CLAUDE.md
 
 ---
 
-## New Features (April 2026)
+## 新功能（2026 年 4 月）
 
-| Feature | Description | How to Use |
-|---------|-------------|------------|
-| **/focus** | Toggle focus view for distraction-free output display (v2.1.110) | Run `/focus` to reduce visual noise during long tasks |
-| **/proactive** | Alias for `/loop` — same recurring-task behavior (v2.1.105) | Use `/proactive` interchangeably with `/loop` |
-| **/recap** | Show a session recap when returning to an existing session (v2.1.108) | Run `/recap` after being away to get context on what was done |
-| **/tui** | Toggle fullscreen TUI (text user interface) mode for flicker-free rendering (v2.1.110) | Use `/tui` in fullscreen terminals or tmux |
-| **/undo** | Alias for `/rewind` — reverts to the previous checkpoint (v2.1.108) | Use `/undo` interchangeably with `/rewind` |
-| **Monitor Tool** | Watch a background command's stdout stream and react to events instead of polling (v2.1.98+) | Use the Monitor tool via [Advanced Features](09-advanced-features/) |
-| **/team-onboarding** | Auto-generate a teammate ramp-up guide from the project's Claude Code setup (v2.1.101) | Run `/team-onboarding` in your project |
-| **Ultraplan auto-create** | Cloud environment created automatically on first `/ultraplan` invocation — no manual setup required (v2.1.101) | Use `/ultraplan <prompt>` |
-| **Remote Control** | Control Claude Code sessions remotely via API | Use the remote control API to send prompts and receive responses programmatically |
-| **Web Sessions** | Run Claude Code in a browser-based environment | Access via `claude web` or through the Anthropic Console |
-| **Desktop App** | Native desktop application for Claude Code | Use `/desktop` or download from Anthropic website |
-| **Agent Teams** | Coordinate multiple agents working on related tasks | Configure teammate agents that collaborate and share context |
-| **Task List** | Background task management and monitoring | Use `/tasks` to view and manage background operations |
-| **Prompt Suggestions** | Context-aware command suggestions | Suggestions appear automatically based on current context |
-| **Git Worktrees** | Isolated git worktrees for parallel development | Use worktree commands for safe parallel branch work |
-| **Sandboxing** | Isolated execution environments for safety | Use `/sandbox` to toggle; runs commands in restricted environments |
-| **MCP OAuth** | OAuth authentication for MCP servers | Configure OAuth credentials in MCP server settings for secure access |
-| **MCP Tool Search** | Search and discover MCP tools dynamically | Use tool search to find available MCP tools across connected servers |
-| **Scheduled Tasks** | Set up recurring tasks with `/loop` and cron tools | Use `/loop 5m /command` or CronCreate tool |
-| **Chrome Integration** | Browser automation with headless Chromium | Use `--chrome` flag or `/chrome` command |
-| **Keyboard Customization** | Customize keybindings including chord support | Use `/keybindings` or edit `~/.claude/keybindings.json` |
-| **Auto Mode** | Fully autonomous operation without permission prompts (Research Preview) | Use `--mode auto` or `/permissions auto`; March 2026 |
-| **Channels** | Multi-channel communication (Telegram, Slack, etc.) (Research Preview) | Configure channel plugins; March 2026 |
-| **Voice Dictation** | Voice input for prompts | Use microphone icon or voice keybinding |
-| **Agent Hook Type** | Hooks that spawn a subagent instead of running a shell command | Set `"type": "agent"` in hook configuration |
-| **Prompt Hook Type** | Hooks that inject prompt text into the conversation | Set `"type": "prompt"` in hook configuration |
-| **MCP Elicitation** | MCP servers can request user input during tool execution | Handle via `Elicitation` and `ElicitationResult` hook events |
-| **Plugin LSP Support** | Language Server Protocol integration via plugins | Configure LSP servers in `plugin.json` for editor features |
-| **Managed Drop-ins** | Organization-managed drop-in configurations (v2.1.83) | Admin-configured via managed policies; auto-applied to all users |
-
----
-
-## Quick Reference Matrix
-
-### Feature Selection Guide
-
-| Need | Recommended Feature | Why |
-|------|---------------------|-----|
-| Quick shortcut | Slash Command | Manual, immediate |
-| Persistent context | Memory | Auto-loaded |
-| Complex automation | Skill | Auto-invoked |
-| Specialized task | Subagent | Isolated context |
-| External data | MCP Server | Real-time access |
-| Event automation | Hook | Event-triggered |
-| Complete solution | Plugin | All-in-one bundle |
-
-### Installation Priority
-
-| Priority | Feature | Command |
-|----------|---------|---------|
-| 1. Essential | Memory | `cp 02-memory/project-CLAUDE.md ./CLAUDE.md` |
-| 2. Daily Use | Slash Commands | `cp 01-slash-commands/*.md .claude/commands/` |
-| 3. Quality | Subagents | `cp 04-subagents/*.md .claude/agents/` |
-| 4. Automation | Hooks | `cp 06-hooks/*.sh ~/.claude/hooks/ && chmod +x ~/.claude/hooks/*.sh` |
-| 5. External | MCP | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` |
-| 6. Advanced | Skills | `cp -r 03-skills/* ~/.claude/skills/` |
-| 7. Complete | Plugins | `/plugin install pr-review` |
+| 功能 | 描述 | 使用方式 |
+|------|------|----------|
+| **/focus** | 切换焦点视图，实现无干扰的输出显示（v2.1.110） | 运行 `/focus` 以在长任务期间减少视觉干扰 |
+| **/proactive** | `/loop` 的别名——相同的循环任务行为（v2.1.105） | `/proactive` 可与 `/loop` 互换使用 |
+| **/recap** | 返回现有会话时显示会话回顾（v2.1.108） | 离开后运行 `/recap` 以获取之前操作的上下文 |
+| **/tui** | 切换全屏 TUI（文本用户界面）模式，实现无闪烁渲染（v2.1.110） | 在全屏终端或 tmux 中使用 `/tui` |
+| **/undo** | `/rewind` 的别名——回退到上一个检查点（v2.1.108） | `/undo` 可与 `/rewind` 互换使用 |
+| **Monitor 工具** | 监控后台命令的 stdout 流并对事件做出响应，替代轮询（v2.1.98+） | 通过[高级功能](09-advanced-features/)使用 Monitor 工具 |
+| **/team-onboarding** | 根据项目的 Claude Code 设置自动生成团队成员上手指南（v2.1.101） | 在项目中运行 `/team-onboarding` |
+| **Ultraplan 自动创建** | 首次调用 `/ultraplan` 时自动创建云端环境——无需手动设置（v2.1.101） | 使用 `/ultraplan <prompt>` |
+| **远程控制** | 通过 API 远程控制 Claude Code 会话 | 使用远程控制 API 以编程方式发送提示词并接收响应 |
+| **Web 会话** | 在浏览器环境中运行 Claude Code | 通过 `claude web` 或 Anthropic 控制台访问 |
+| **桌面应用** | Claude Code 原生桌面应用程序 | 使用 `/desktop` 或从 Anthropic 官网下载 |
+| **智能体团队** | 协调多个智能体协作处理相关任务 | 配置队友智能体进行协作并共享上下文 |
+| **任务列表** | 后台任务管理与监控 | 使用 `/tasks` 查看和管理后台操作 |
+| **提示词建议** | 上下文感知的命令建议 | 建议会根据当前上下文自动出现 |
+| **Git 工作树** | 隔离的 Git 工作树，用于并行开发 | 使用工作树命令进行安全的并行分支工作 |
+| **沙盒化** | 隔离的执行环境，保障安全 | 使用 `/sandbox` 切换；在受限环境中运行命令 |
+| **MCP OAuth** | MCP 服务器的 OAuth 认证 | 在 MCP 服务器设置中配置 OAuth 凭证以实现安全访问 |
+| **MCP 工具搜索** | 动态搜索和发现 MCP 工具 | 使用工具搜索在已连接的服务器中查找可用的 MCP 工具 |
+| **定时任务** | 使用 `/loop` 和 cron 工具设置循环任务 | 使用 `/loop 5m /command` 或 CronCreate 工具 |
+| **Chrome 集成** | 使用无头 Chromium 进行浏览器自动化 | 使用 `--chrome` 标志或 `/chrome` 命令 |
+| **键盘自定义** | 自定义键绑定，支持组合键 | 使用 `/keybindings` 或编辑 `~/.claude/keybindings.json` |
+| **Auto 模式** | 完全自主运行，无需权限提示（研究预览） | 使用 `--mode auto` 或 `/permissions auto`；2026 年 3 月 |
+| **频道** | 多频道通信（Telegram、Slack 等）（研究预览） | 配置频道插件；2026 年 3 月 |
+| **语音输入** | 通过语音输入提示词 | 使用麦克风图标或语音键绑定 |
+| **Agent 钩子类型** | 派生子智能体而非运行 Shell 命令的钩子 | 在钩子配置中设置 `"type": "agent"` |
+| **Prompt 钩子类型** | 向对话中注入提示词文本的钩子 | 在钩子配置中设置 `"type": "prompt"` |
+| **MCP 交互请求** | MCP 服务器可在工具执行期间请求用户输入 | 通过 `Elicitation` 和 `ElicitationResult` 钩子事件处理 |
+| **插件 LSP 支持** | 通过插件集成语言服务器协议 | 在 `plugin.json` 中配置 LSP 服务器以获取编辑器功能 |
+| **托管 Drop-in 配置** | 组织管理的 Drop-in 配置（v2.1.83） | 由管理员通过托管策略配置；自动应用到所有用户 |
 
 ---
 
-## Complete One-Command Installation
+## 快速参考矩阵
 
-Install all examples from this repository:
+### 功能选择指南
+
+| 需求 | 推荐功能 | 原因 |
+|------|----------|------|
+| 快速快捷操作 | 斜杠命令 | 手动触发、立即执行 |
+| 持久化上下文 | 记忆 | 自动加载 |
+| 复杂自动化 | 技能 | 自动调用 |
+| 专业化任务 | 子智能体 | 隔离上下文 |
+| 外部数据 | MCP 服务器 | 实时访问 |
+| 事件自动化 | 钩子 | 事件触发 |
+| 完整解决方案 | 插件 | 一体化捆绑 |
+
+### 安装优先级
+
+| 优先级 | 功能 | 命令 |
+|--------|------|------|
+| 1. 必备 | 记忆 | `cp 02-memory/project-CLAUDE.md ./CLAUDE.md` |
+| 2. 日常使用 | 斜杠命令 | `cp 01-slash-commands/*.md .claude/commands/` |
+| 3. 质量保障 | 子智能体 | `cp 04-subagents/*.md .claude/agents/` |
+| 4. 自动化 | 钩子 | `cp 06-hooks/*.sh ~/.claude/hooks/ && chmod +x ~/.claude/hooks/*.sh` |
+| 5. 外部集成 | MCP | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` |
+| 6. 高级功能 | 技能 | `cp -r 03-skills/* ~/.claude/skills/` |
+| 7. 完整方案 | 插件 | `/plugin install pr-review` |
+
+---
+
+## 一键安装全部
+
+从本仓库安装所有示例：
 
 ```bash
-# Create directories
+# 创建目录
 mkdir -p .claude/{commands,agents,skills} ~/.claude/{hooks,skills}
 
-# Install all features
+# 安装所有功能
 cp 01-slash-commands/*.md .claude/commands/ && \
 cp 02-memory/project-CLAUDE.md ./CLAUDE.md && \
 cp -r 03-skills/* ~/.claude/skills/ && \
@@ -521,20 +521,20 @@ chmod +x ~/.claude/hooks/*.sh
 
 ---
 
-## Additional Resources
+## 其他资源
 
-- [Official Claude Code Documentation](https://code.claude.com/docs/en/overview)
-- [MCP Protocol Specification](https://modelcontextprotocol.io)
-- [Learning Roadmap](LEARNING-ROADMAP.md)
-- [Main README](README.md)
+- [Claude Code 官方文档](https://code.claude.com/docs/en/overview)
+- [MCP 协议规范](https://modelcontextprotocol.io)
+- [学习路线图](LEARNING-ROADMAP.md)
+- [主 README](README.md)
 
 ---
 
-**Last Updated**: April 24, 2026
-**Claude Code Version**: 2.1.119
-**Sources**:
+**最后更新**：2026 年 4 月 24 日
+**Claude Code 版本**：2.1.119
+**来源**：
 - https://code.claude.com/docs/en/overview
 - https://code.claude.com/docs/en/commands
 - https://code.claude.com/docs/en/hooks
 - https://github.com/anthropics/claude-code/releases/tag/v2.1.118
-**Compatible Models**: Claude Sonnet 4.6, Claude Opus 4.7, Claude Haiku 4.5
+**兼容模型**：Claude Sonnet 4.6、Claude Opus 4.7、Claude Haiku 4.5
